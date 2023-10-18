@@ -96,5 +96,12 @@
     "twitter": "https://twitter.com/mintlify",
     "github": "https://github.com/mintlify",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+  },
+
+  "api": {
+    "playground": {
+      "mode": "simple"
+    }
+  },
+  "openapi": "https://example.com/openapi.json"
 }
