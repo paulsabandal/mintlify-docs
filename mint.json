@@ -76,9 +76,10 @@
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "hotglue API",
       "pages": [
-        "api-reference/authentication"
+        "api-reference/overview",
+        "api-reference/secure-requests"
       ]
     },
     {
