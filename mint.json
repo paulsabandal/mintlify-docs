@@ -104,15 +104,31 @@
     {
       "group": "V1 - One Way Flows",
       "pages": [
-        "api-reference/flows/get",
-        "api-reference/secure-requests"
+        "api-reference/v1/introduction",
+        {
+          "group": "Source Metadata",
+          "pages": [
+            "api-reference/v1/source-metadata/get",
+            "api-reference/v1/source-metadata/create",
+            "api-reference/v1/source-metadata/update",
+            "api-reference/v1/source-metadata/delete"
+          ]
+        }
       ]
     },
     {
       "group": "V2 - Two Way Flows",
       "pages": [
-        "api-reference/flows/get",
-        "api-reference/secure-requests"
+        "api-reference/v2/introduction",
+        {
+          "group": "Connector Metadata",
+          "pages": [
+            "api-reference/v2/connector-metadata/get",
+            "api-reference/v2/connector-metadata/create",
+            "api-reference/v2/connector-metadata/update",
+            "api-reference/v2/connector-metadata/delete"
+          ]
+        }
       ]
     }
   ],
