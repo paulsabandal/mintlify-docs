@@ -88,7 +88,30 @@
             "api-reference/manage-tenants/update",
             "api-reference/manage-tenants/delete"
           ]
+        },
+        {
+          "group": "Flows",
+          "pages": [
+            "api-reference/flows/get",
+            "api-reference/flows/create",
+            "api-reference/flows/update",
+            "api-reference/flows/delete"
+          ]
         }
+      ]
+    },
+    {
+      "group": "V1 - One Way Flows",
+      "pages": [
+        "api-reference/overview",
+        "api-reference/secure-requests"
+      ]
+    },
+    {
+      "group": "V2 - Two Way Flows",
+      "pages": [
+        "api-reference/overview",
+        "api-reference/secure-requests"
       ]
     }
   ],
