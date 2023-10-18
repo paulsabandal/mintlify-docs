@@ -11,11 +11,11 @@
     "light": "#FA5240",
     "dark": "#0D001D",
     "background": {
-      "dark": "#101014"
+      "dark": "#1c1c1c"
     },
     "anchors": {
-      "from": "#FF7F57",
-      "to": "#9563FF"
+      "from": "#FF2651",
+      "to": "#FF7B2C"
     }
   },
   "topbarLinks": [
