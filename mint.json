@@ -103,14 +103,14 @@
     {
       "group": "V1 - One Way Flows",
       "pages": [
-        "api-reference/overview",
+        "api-reference/flows/get",
         "api-reference/secure-requests"
       ]
     },
     {
       "group": "V2 - Two Way Flows",
       "pages": [
-        "api-reference/overview",
+        "api-reference/flows/get",
         "api-reference/secure-requests"
       ]
     }
