@@ -53,8 +53,17 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
+        "faq",
         "development"
+      ]
+    },
+    {
+      "group": "Key Concepts",
+      "pages": [
+        "key-concepts/environments",
+        "key-concepts/flows",
+        "key-concepts/tenants",
+        "key-concepts/sources"
       ]
     },
     {
