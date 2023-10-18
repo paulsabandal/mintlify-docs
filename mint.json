@@ -94,10 +94,9 @@
         {
           "group": "Flows",
           "pages": [
-            "api-reference/flows/get",
-            "api-reference/flows/create",
-            "api-reference/flows/update",
-            "api-reference/flows/delete"
+            "api-reference/flows/create-linked-flows",
+            "api-reference/flows/retrieve-linked-flows",
+            "api-reference/flows/retrieve-supported-flows"
           ]
         }
       ]
