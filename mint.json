@@ -53,8 +53,7 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "faq",
-        "development"
+        "faq"
       ]
     },
     {
