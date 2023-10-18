@@ -100,7 +100,7 @@
   "api": {
     "baseUrl": "https://client-api.hotglue.xyz",
     "auth": {
-      "method": "basic"
+      "method": "key"
     }
   }
 }
