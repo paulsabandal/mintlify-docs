@@ -79,16 +79,16 @@
       "group": "hotglue API",
       "pages": [
         "api-reference/overview",
-        "api-reference/secure-requests"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "api-reference/secure-requests", 
+        {
+          "group": "Manage Tenants",
+          "pages": [
+            "api-reference/manage-tenants/get",
+            "api-reference/manage-tenants/create",
+            "api-reference/manage-tenants/update",
+            "api-reference/manage-tenants/delete"
+          ]
+        }
       ]
     }
   ],
