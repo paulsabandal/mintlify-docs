@@ -158,7 +158,7 @@
             "api-reference/v2/schedule-jobs/update",
             "api-reference/v2/schedule-jobs/delete"
           ]
-        },
+        }
       ]
     },
     {
