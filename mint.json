@@ -106,14 +106,59 @@
       "pages": [
         "api-reference/v1/introduction",
         {
-          "group": "Source Metadata",
+          "group": "Source metadata",
           "pages": [
             "api-reference/v1/source-metadata/get",
             "api-reference/v1/source-metadata/create",
             "api-reference/v1/source-metadata/update",
             "api-reference/v1/source-metadata/delete"
           ]
-        }
+        },
+        {
+          "group": "Jobs",
+          "pages": [
+            "api-reference/v1/jobs/get",
+            "api-reference/v1/jobs/create",
+            "api-reference/v1/jobs/update",
+            "api-reference/v1/jobs/delete"
+          ]
+        },
+        {
+          "group": "Linked sources",
+          "pages": [
+            "api-reference/v1/linked-sources/get",
+            "api-reference/v1/linked-sources/create",
+            "api-reference/v1/linked-sources/update",
+            "api-reference/v1/linked-sources/delete"
+          ]
+        },
+        {
+          "group": "Linked sources state",
+          "pages": [
+            "api-reference/v1/linked-sources-state/get",
+            "api-reference/v1/linked-sources-state/create",
+            "api-reference/v1/linked-sources-state/update",
+            "api-reference/v1/linked-sources-state/delete"
+          ]
+        },
+        {
+          "group": "Linked targets",
+          "pages": [
+            "api-reference/v1/linked-targets/get",
+            "api-reference/v1/linked-targets/create",
+            "api-reference/v1/linked-targets/update",
+            "api-reference/v1/linked-targets/delete"
+          ]
+        },
+        {
+          "group": "Schedule jobs",
+          "pages": [
+            "api-reference/v2/schedule-jobs/get",
+            "api-reference/v2/schedule-jobs/create",
+            "api-reference/v2/schedule-jobs/update",
+            "api-reference/v2/schedule-jobs/delete"
+          ]
+        },
       ]
     },
     {
@@ -121,12 +166,30 @@
       "pages": [
         "api-reference/v2/introduction",
         {
-          "group": "Connector Metadata",
+          "group": "Connector metadata",
           "pages": [
             "api-reference/v2/connector-metadata/get",
             "api-reference/v2/connector-metadata/create",
             "api-reference/v2/connector-metadata/update",
             "api-reference/v2/connector-metadata/delete"
+          ]
+        },
+        {
+          "group": "Linked connectors",
+          "pages": [
+            "api-reference/v2/linked-connectors/get",
+            "api-reference/v2/linked-connectors/create",
+            "api-reference/v2/linked-connectors/update",
+            "api-reference/v2/linked-connectors/delete"
+          ]
+        },
+        {
+          "group": "Jobs",
+          "pages": [
+            "api-reference/v2/jobs/get",
+            "api-reference/v2/jobs/create",
+            "api-reference/v2/jobs/update",
+            "api-reference/v2/jobs/delete"
           ]
         }
       ]
