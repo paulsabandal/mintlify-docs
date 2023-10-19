@@ -83,6 +83,12 @@
           "pages": [
             "embedded-widget/react/life-cycle"
           ]
+        },
+        {
+          "group": "Options",
+          "pages": [
+            "embedded-widget/options/life-cycle"
+          ]
         }
       ]
     },
