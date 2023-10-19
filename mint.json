@@ -62,19 +62,31 @@
         "key-concepts/environments",
         "key-concepts/flows",
         "key-concepts/tenants",
-        "key-concepts/sources"
+        "key-concepts/sources",
+        {
+          "group": "Jobs",
+          "pages": [
+            "key-concepts/jobs/life-cycle",
+            "key-concepts/jobs/scheduling"
+          ]
+        }
       ]
     },
+
     {
-      "group": "Essentials",
+      "group": "Embedded Widget",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation"
+        "embedded-widget/overview",
+        "embedded-widget/javascript",
+        {
+          "group": "React Reference",
+          "pages": [
+            "embedded-widget/react/life-cycle",
+          ]
+        }
       ]
     },
+
     {
       "group": "hotglue API",
       "pages": [
