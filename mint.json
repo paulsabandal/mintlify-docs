@@ -46,8 +46,7 @@
       "url": "https://hotglue.com/docs/unified"
     }
   ],
-  "anchors": [
-  ],
+  "anchors": [],
   "navigation": [
     {
       "group": "Get Started",
@@ -72,7 +71,6 @@
         }
       ]
     },
-
     {
       "group": "Embedded Widget",
       "pages": [
@@ -92,12 +90,11 @@
         }
       ]
     },
-
     {
       "group": "hotglue API",
       "pages": [
         "api-reference/overview",
-        "api-reference/secure-requests", 
+        "api-reference/secure-requests",
         {
           "group": "Manage Tenants",
           "pages": [
@@ -218,10 +215,5 @@
     "github": "https://github.com/mintlify",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
   },
-  "api": {
-    "baseUrl": "https://client-api.hotglue.xyz",
-    "auth": {
-      "method": "key"
-    }
-  }
+  "openapi": "https://docs.hotglue.com/openapi/64b43274b169fa0023182091"
 }
