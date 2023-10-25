@@ -123,19 +123,21 @@
         {
           "group": "Source metadata",
           "pages": [
-            "api-reference/v1/source-metadata/get",
-            "api-reference/v1/source-metadata/create",
-            "api-reference/v1/source-metadata/update",
-            "api-reference/v1/source-metadata/delete"
+            "api-reference/v1/source-metadata/supported-sources",
+            "api-reference/v1/source-metadata/available-sources"
           ]
         },
         {
           "group": "Jobs",
           "pages": [
-            "api-reference/v1/jobs/get",
-            "api-reference/v1/jobs/create",
-            "api-reference/v1/jobs/update",
-            "api-reference/v1/jobs/delete"
+            "api-reference/v1/jobs/run-job",
+            "api-reference/v1/jobs/poll-job-status",
+            "api-reference/v1/jobs/get-latest-job",
+            "api-reference/v1/jobs/rollback-job",
+            "api-reference/v1/jobs/kill-job",
+            "api-reference/v1/jobs/fetch-jobs",
+            "api-reference/v1/jobs/trigger-download",
+            "api-reference/v1/jobs/fetch-job-zip"
           ]
         },
         {
