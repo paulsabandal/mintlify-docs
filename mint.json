@@ -98,8 +98,8 @@
         {
           "group": "Manage Tenants",
           "pages": [
-            "api-reference/manage-tenants/retrieve",
-            "api-reference/manage-tenants/toggle",
+            "api-reference/manage-tenants/retrieve-tenants",
+            "api-reference/manage-tenants/toggle-schedule",
             "api-reference/manage-tenants/delete-snapshot",
             "api-reference/manage-tenants/delete-tenant",
             "api-reference/manage-tenants/set-tenant-config",
