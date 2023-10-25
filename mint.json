@@ -101,7 +101,7 @@
             "api-reference/manage-tenants/retrieve-tenants",
             "api-reference/manage-tenants/toggle-schedule",
             "api-reference/manage-tenants/delete-snapshot",
-            "api-reference/manage-tenants/delete-tenant",
+            "api-reference/manage-tenants/delete-a-tenant",
             "api-reference/manage-tenants/set-tenant-config",
             "api-reference/manage-tenants/update-tenant-config"
           ]
