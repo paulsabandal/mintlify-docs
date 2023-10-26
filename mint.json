@@ -143,37 +143,37 @@
         {
           "group": "Linked sources",
           "pages": [
-            "api-reference/v1/linked-sources/get",
-            "api-reference/v1/linked-sources/create",
-            "api-reference/v1/linked-sources/update",
-            "api-reference/v1/linked-sources/delete"
+            "api-reference/v1/linked-sources/link-a-source",
+            "api-reference/v1/linked-sources/unlink-a-source",
+            "api-reference/v1/linked-sources/retrieve-linked-source",
+            "api-reference/v1/linked-sources/update-linked-sources",
+            "api-reference/v1/linked-sources/run-discover",
+            "api-reference/v1/linked-sources/poll-discover"
           ]
         },
         {
           "group": "Linked sources state",
           "pages": [
-            "api-reference/v1/linked-sources-state/get",
-            "api-reference/v1/linked-sources-state/create",
-            "api-reference/v1/linked-sources-state/update",
-            "api-reference/v1/linked-sources-state/delete"
+            "api-reference/v1/linked-sources-state/retrieve-source-state",
+            "api-reference/v1/linked-sources-state/set-source-state",
+            "api-reference/v1/linked-sources-state/delete-source-state"
           ]
         },
         {
           "group": "Linked targets",
           "pages": [
-            "api-reference/v1/linked-targets/get",
-            "api-reference/v1/linked-targets/create",
-            "api-reference/v1/linked-targets/update",
-            "api-reference/v1/linked-targets/delete"
+            "api-reference/v1/linked-targets/link-a-target",
+            "api-reference/v1/linked-targets/unlink-a-target",
+            "api-reference/v1/linked-targets/retrieve-linked-target",
+            "api-reference/v1/linked-targets/run-discover-1"
           ]
         },
         {
           "group": "Schedule jobs",
           "pages": [
-            "api-reference/v2/schedule-jobs/get",
-            "api-reference/v2/schedule-jobs/create",
-            "api-reference/v2/schedule-jobs/update",
-            "api-reference/v2/schedule-jobs/delete"
+            "api-reference/v2/schedule-jobs/retrieve-jobs-schedule",
+            "api-reference/v2/schedule-jobs/create-jobs-schedule",
+            "api-reference/v2/schedule-jobs/create-jobs-schedule"
           ]
         }
       ]
