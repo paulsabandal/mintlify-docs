@@ -171,9 +171,9 @@
         {
           "group": "Schedule jobs",
           "pages": [
-            "api-reference/v2/schedule-jobs/retrieve-jobs-schedule",
-            "api-reference/v2/schedule-jobs/create-jobs-schedule",
-            "api-reference/v2/schedule-jobs/create-jobs-schedule"
+            "api-reference/v1/schedule-jobs/retrieve-jobs-schedule",
+            "api-reference/v1/schedule-jobs/create-jobs-schedule",
+            "api-reference/v1/schedule-jobs/create-jobs-schedule"
           ]
         }
       ]
