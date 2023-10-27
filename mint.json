@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "hotglue Docs",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -89,6 +89,24 @@
           "pages": [
             "embedded-widget/options/life-cycle"
           ]
+        }
+      ]
+    },
+    {
+      "group": "Unified Schema",
+      "pages": [
+        "unified-schema/introduction",
+        {
+          "name": "Accounting Schema",
+          "url": "https://hotglue.com/docs/unified/accounting#introduction/"
+        },
+        {
+          "name": "E-Commerce Schema",
+          "url": "https://hotglue.com/docs/unified/e-commerce#introduction"
+        },
+        {
+          "name": "CRM Schema",
+          "url": "https://hotglue.com/docs/unified/crm#introduction"
         }
       ]
     },
