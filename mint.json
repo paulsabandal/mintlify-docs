@@ -79,7 +79,9 @@
         {
           "group": "React Reference",
           "pages": [
-            "embedded-widget/react/life-cycle"
+            "embedded-widget/react/use-the-widget",
+            "embedded-widget/react/hotglue-config",
+            "embedded-widget/react/inline-component"
           ]
         },
         {
