@@ -95,7 +95,8 @@
     {
       "group": "Unified Schema",
       "pages": [
-        "unified-schema/introduction"
+        "unified-schema/introduction",
+        "unified-schema/accounting"
       ]
     },
     {
