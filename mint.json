@@ -99,6 +99,23 @@
       ]
     },
     {
+      "group": "Transformation",
+      "pages": [
+        "transformation/overview",
+        "transformation/writing-a-basic-script",
+        "transformation/debugging-a-script",
+        "transformation/snapshots",
+        {
+          "group": "Use Cases",
+          "pages": [
+            "api-reference/transformation/push-to-apis",
+            "api-reference/transformation/custom-params",
+            "api-reference/transformation/typing-and-primary-keys"
+          ]
+        }
+      ]
+    },
+    {
       "group": "hotglue API",
       "pages": [
         "api-reference/overview",
