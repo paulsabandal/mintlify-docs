@@ -96,7 +96,9 @@
       "group": "Unified Schema",
       "pages": [
         "unified-schema/introduction",
-        "unified-schema/accounting"
+        "unified-schema/accounting",
+        "unified-schema/e-commerce",
+        "unified-schema/crm"
       ]
     },
     {
