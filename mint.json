@@ -102,6 +102,18 @@
       ]
     },
     {
+      "group": "CLI",
+      "pages": [
+        "cli/overview",
+        "cli/configuration",
+        "cli/env",
+        "cli/ETL",
+        "cli/flows",
+        "cli/jobs",
+        "cli/tenants"
+      ]
+    },
+    {
       "group": "Transformation",
       "pages": [
         "transformation/overview",
