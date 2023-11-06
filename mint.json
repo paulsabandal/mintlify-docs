@@ -107,7 +107,7 @@
         "cli/overview",
         "cli/configuration",
         "cli/env",
-        "cli/ETL",
+        "cli/etl",
         "cli/flows",
         "cli/jobs",
         "cli/tenants"
@@ -127,7 +127,8 @@
             "transformation/use-cases/custom-params",
             "transformation/use-cases/typing-and-primary-keys"
           ]
-        }
+        },
+        "transformation/sample-scripts"
       ]
     },
     {
