@@ -1,22 +1,19 @@
 ---
 title: "Introduction"
-description: "Example overview page before API endpoints"
+description: "The following endpoints apply for V1, one-way flows"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+Flows define a group of integrations that your customers can connect to. There are three types of flows that you can enable in hotglue:
 
-```bash
-'Authorization': 'Token <team_token>'
-```
+## V1 - One-way flows
+### Source flow
+This is the simplest way to use hotglue, and the default flow type when you toggle off **Bi-directional flows**. With a source flow, your customer connects the `source` or `tap`, and you read data in from those linked sources into your own default target.
 
-## API Tokens
+### Target flow
+This can be enabled in the **General** tab of a V1 flow. This is the inverse of a source flow, where your customer links an integration that you write data out to, but cannot read data in from.
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+## V2 - Bi-directional flows
+If you need to read and write data to the same integration, you can use a bi-directional flow to use the same connection for both. There are two main differences between API calls for V1 and V2 flows:
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
-
-### Permissions
-
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
-
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+- V2 flows include a `/v2` in API calls.
+- V2 flows do not have a concept of `taps` and `targets`. From the perspective of a V2 flow, everything is a `connector`.
