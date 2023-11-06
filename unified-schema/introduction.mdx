@@ -3,17 +3,27 @@ title: "Introduction"
 description: "Learn how the unified schema works and how to use it."
 ---
 
-Flows define a group of integrations that your customers can connect to. There are three types of flows that you can enable in hotglue:
+## Description
+hotglue offers a common schema to help standardize your data and enable you to create integrations faster.
 
-## V1 - One-way flows
-### Source flow
-This is the simplest way to use hotglue, and the default flow type when you toggle off **Bi-directional flows**. With a source flow, your customer connects the `source` or `tap`, and you read data in from those linked sources into your own default target.
+Instead of configuring every connector with scripts and field maps, hotglue unified schemas send and receive data in the same format, no matter the connector.
 
-### Target flow
-This can be enabled in the **General** tab of a V1 flow. This is the inverse of a source flow, where your customer links an integration that you write data out to, but cannot read data in from.
+This can be helpful if you want to build many integrations quickly, or if your development resources are limited. For those who find this standardization limiting, you may want to check out [transformation scripts](https://docs.hotglue.com/docs/transformations-overview) instead.
 
-## V2 - Bi-directional flows
-If you need to read and write data to the same integration, you can use a bi-directional flow to use the same connection for both. There are two main differences between API calls for V1 and V2 flows:
+You can find a complete list of compatible connectors in our [unified schema docs](https://hotglue.com/docs/unified).
 
-- V2 flows include a `/v2` in API calls.
-- V2 flows do not have a concept of `taps` and `targets`. From the perspective of a V2 flow, everything is a `connector`.
+
+## Usage
+
+1. Turn on the unified schema
+Select a [compatible connector](https://hotglue.com/docs/unified).
+
+Under **configuration**, click the **unified schema toggle**.
+
+<Info>
+If you don't see the unified schema toggle, make sure your selected connector is compatible.
+</Info>
+
+<Frame title="Click confirm to delete your existing script and field map and turn on unified schema">
+<img src="https://files.readme.io/c7c8cf3-Screen_Shot_2022-12-08_at_4.50.34_PM.png" />
+</Frame>
