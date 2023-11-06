@@ -1,8 +1,42 @@
 ---
 title: 'Flows'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'What are flows?'
 ---
 
-## Add some content
 
-Learn how to update your docs locally and and deploy them to the public.
+## What is a flow?
+In hotglue, each "type" of integration you want to offer users is grouped into a **flow.**
+
+For example, you may want your users to import data from **Development** tools, like GitHub and GitLab, and **E-Commerce** shops, like Shopify and WooCommerce. When your users first open the hotglue widget they'll see something like the following:
+
+<Frame caption="hotglue widget - flows">
+  <img src="https://files.readme.io/8a39f05-Screen_Shot_2022-06-10_at_3.50.18_PM.png" />
+</Frame>
+
+This allows your user to select what they wish to import, and more importantly **where they want to import it from.** For example, if your user wanted to import **E-Commerce** data they may be able to import it from sources like Shopify, WooCommerce, and Magento. In the hotglue widget, this would look something like below:
+
+<Frame caption="hotglue widget - E-Commerce flow">
+  <img src="https://files.readme.io/8faa323-Screen_Shot_2022-06-10_at_3.54.09_PM.png" />
+</Frame>
+
+
+## How do flows help me?
+
+Flows serve two main purposes:
+
+1. Flows let you define **what types of integrations you want to support.** For example, for a **Development** flow you may want to support importing data from GitHub or GitLab - but that doesn't make much sense for an **E-Commerce** flow.
+
+2. Flows make it easy for your users to keep track of their data. Users can clearly see what kinds of data your application needs, and what platforms they can connect.
+
+
+<Frame caption="hotglue widget - Development flow connected">
+  <img src="https://files.readme.io/bcdcd85-Screen_Shot_2022-06-10_at_3.57.26_PM.png />
+</Frame>
+
+
+## Flow Options
+### What is a Target flow?
+
+A target flow is when the tenant will link the target instead of the source, so that the data will be written to a tenants connected integration.
+
+For example, if you wanted to export data to your tenants accounting software such as Sage Intacct, that is considered a target flow.
