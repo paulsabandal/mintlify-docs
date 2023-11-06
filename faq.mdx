@@ -3,9 +3,17 @@ title: 'FAQ'
 description: 'Start building awesome documentation in under 5 minutes'
 ---
 
-## Setup your development
+## How does hotglue actually speed up the process of building integrations?
 
-Learn how to update your docs locally and and deploy them to the public.
+Most iPaaS solutions focus on authorization, event triggers, and unified data models. They are generally designed to be low-code, standardized abstractions of external APIs with limited scopes and use cases.
+
+hotglue is specifically not a low code integration tool – we've found that:
+
+1. dealing with authorization flows is largely boilerplate, and is not what developers find difficult about creating integrations. Instead, developers want to derive value from their users' data. Although hotglue offers similar authorization management, unified data models, and an embeddable interface, our focus lies in processing raw data before it reaches your backend.
+
+2. developers prefer granular control over data, and sacrificing that to a drag-and-drop editor typically forces developers to write their own preprocessing code on the output data before it is ingestible.
+
+3. proprietary connectors leave developers at the whim of the iPaaS vendor's product roadmap. By using open-source connectors, any developer with Python knowledge can build a hotglue-compatible Singer connector.
 
 ### Edit and preview
 
