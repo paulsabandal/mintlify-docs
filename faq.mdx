@@ -1,6 +1,6 @@
 ---
 title: 'FAQ'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Get answers to all your questions on hotglue.'
 ---
 
 ## How does hotglue actually speed up the process of building integrations?
@@ -20,6 +20,66 @@ hotglue is specifically **not** a low code integration tool – we've found that
   <img src="https://files.readme.io/09511cf-format.png" />
 </Frame>
 
+
+---
+
+## What if I need an integration that isn't currently supported by hotglue?
+
+<Tip>
+hotglue has over 200 connectors – if you'd like an integration that is not listed on [our connectors page](https://hotglue.com/connectors), let us know.
+</Tip>
+
+Since hotglue is based on Singer, you can easily create a new Singer tap yourself (for instance, using the [Singer SDK](https://gitlab.com/meltano/singer-sdk)) and use it in hotglue.
+
+This way your team maintains flexibility over shipping new integrations even while leveraging the hotglue platform.
+
+### Can hotglue develop new connectors for me?
+Yes! Our integrations team is available to develop new connectors if needed. In fact, all of our [paid plans](https://hotglue.com/pricing) come with service hours that can be used towards building new connectors.
+
+---
+
+
+## How does hotglue compare to Zapier or Integromat?
+
+**Zapier** and **Integromat** are good solutions for giving your users self-managed, trigger based connections to their apps. They can both be great tools to spin up integrations quickly and to understand which integrations users want.
+
+**hotglue** sits inside your product and functions just like a native integration in your product. This leads to a simpler connection experience for users – instead of setting up a Zap, users just need to authorize their 3rd party app and your software takes care of the rest.
+
+With Zapier or Integromat, your users also bear the cost of integrating with your platform. With hotglue, integrations are a feature of your app, and can be embedded anywhere in their user journey.
+
+This is useful for onboarding purposes, but also to enable more complex integrations. Zapier and Integromat may excel at transmitting one-off records, but solutions that require bulk data, deep business logic, or data pre-processing usually find Zapier and Integromat insufficient.
+
+---
+
+## Is there a limit to the amount of data hotglue can transfer?
+
+hotglue is designed to sync data *incrementally*, meaning the first **sync job** pulls all historical data (from a specific *start date*), and subsequent sync jobs only pull the delta data (new or updated records).
+
+hotglue has no specific limitations on the data size per sync, and can adjust these based on your subscription plan. To learn more, shoot us an email at [hello@hotglue.xyz](hello@hotglue.xyz).
+
+---
+
+## Can I sync data both ways with hotglue?
+
+Yes! Over 60 of our 200+ integrations support bi-directional syncing.
+
+You can write data to supported connectors via the hotglue API, a database, or even your own API. You can also read data to your own API, along with any database or filestore connector in our library.
+
+---
+
+## Can hotglue sync data in real time?
+
+hotglue supports real-time triggers for many of our integrations. For example, hotglue can automatically trigger a sync job when a new contact is created in Salesforce, or when a new order is placed in Shopify.
+
+However, hotglue is primarily designed for bulk use cases, where you need to clone historical data from an integration, fetch incremental changes, and push data back.
+
+Curious to know more? [Book a demo call](https://hotglue.com/demo).
+
+---
+
+## Something else?
+
+Don't see the question you're looking for? Shoot us an email: [hello@hotglue.xyz](hello@hotglue.xyz)
 
 
 
