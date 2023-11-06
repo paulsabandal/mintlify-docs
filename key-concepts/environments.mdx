@@ -1,8 +1,40 @@
 ---
 title: 'Environments'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'What hotglue environments are, and how to use them'
 ---
 
-## Add some content
+## What is an environment?
 
-Learn how to update your docs locally and and deploy them to the public.
+<Frame caption="Environment Dashboard">
+  <img src="https://files.readme.io/92b5937-hotglue-EnvironmentDashboard.png" />
+</Frame>
+
+In hotglue, we provide the ability to create segmented development, staging, and production environments to manage your integrations.
+
+When you first signup for hotglue, we automatically generate your development environment with an id with the format dev.hotglue.yourdomain.com. This is where you can start testing hotglue and developing your first integrations.
+
+The advantages of having segmented environments are:
+
+1. to give you the flexibility to build and test new integrations without affecting your production tenants
+
+2. when embedding hotglue you can specify the environment to use – so in your product's staging environment, you should use your staging hotglue environment
+
+3. each environment can be configured to push data to different targets – so in your staging environment, data can go to a testing database rather than a production database
+
+
+Moving out of your development environment
+Once you have your integrations configured and ready to use, you should promote your configured flows to a new staging or production environment.
+
+The first step is to create a new environment. We recommend creating environments with the following ID formats:
+
+- `dev.hotglue.yourdomain.com`
+- `staging.hotglue.yourdomain.com`
+- `prod.hotglue.yourdomain.com`
+
+<Frame caption="Create Environment Dialog">
+  <img src="https://files.readme.io/d370557-hotglue-CreateEnvironment.png" />
+</Frame>
+
+From there you can copy your integration flows across environments – feel free to [reach out to hotglue support](support@hotglue.xyz) if you need help with this process.
+
+
