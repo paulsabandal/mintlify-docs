@@ -1,22 +1,76 @@
 ---
 title: "Job settings"
-description: "Example overview page before API endpoints"
+description: "Set up job settings and webhook monitoring"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
 
-```bash
-'Authorization': 'Token <team_token>'
+# Basic Settings
+
+
+| Setting | Description |
+| --- | --- |
+| Force full sync | This will run _full_ historical sync jobs every time, including records that have already been synced. |
+| Force discover | Force discover will refresh the field map before every sync job. This makes jobs run longer, but is useful when each user has different fields. |
+| Automatically trigger a job when an integration is linked | This will run an initial full sync job as soon as your customer links an integration. |
+| Trigger a discover when an integration is linked | This will refresh the field map after a user links. This is especially useful if you want your users to map fields before running the first job. |
+| Automatically rollback job on failure | When a critical error is detected, this setting will automatically roll back the entire job. |
+| Automatically enable default sync schedule | This will create a sync schedule every time a user links a new source. This only applies to sources synced after this setting is enabled. Learn more about [default sync schedules here](https://docs.hotglue.com/docs/jobs-scheduling#using-a-default-sync-schedule). |
+| Save snapshots even when jobs fail | By default, snapshots will only persist if a job is successful. Turning this on will allow snapshots to be updated whether or not the associated job succeeds. Learn more [about snapshots here.](https://docs.hotglue.com/docs/transformations-snapshots) |
+
+# Datadog integration
+
+You can configure hotglue to push job events (success or failures) directly to your Datadog events to maintain observability in one platform. To configure, head to your Environment Job Settings, and configure your Datadog Region and API Key.
+
+Once these settings are saved, hotglue will automatically begin pushing job events to your Datadog account!
+
+<Frame caption="Datadog Settings">
+![3018](https://files.readme.io/26cf3b2-Screen_Shot_2022-06-09_at_11.10.04_AM.png "Screen Shot 2022-06-09 at 11.10.04 AM.png")
+</Frame>
+
+
+# Slack integration
+
+For a simpler notification system, you can configure a free Slack app to get notified about failed jobs.
+
+1.  Create a [free Slack app](https://api.slack.com/messaging/webhooks).
+2.  Paste your new incoming webhook URL into hotglue. This URL will look something like this:
+
+```
+https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
-## API Tokens
+# Custom storage
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+In certain cases you may want to _snapshot_ or _cache_ the data that hotglue processes during a specific sync job. By default this is done using hotglue's infrastructure, but you can configure this to be done using your own **AWS S3 buckets**.
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
+To store either the snapshot or cache data in your own S3 bucket, you need to:
 
-### Permissions
+1.  Create an S3 bucket that hotglue will use during jobs
+2.  Create an IAM user for hotglue to access this S3 bucket with programmatic credentials (Access Key Id / Secret Access Key pair)
+3.  Create an IAM permission policy and attach it to the IAM user. The policy should be as follows:
 
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
+ ```
+ {
+ 	"Sid": "VisualEditor0",
+ 	"Effect": "Allow",
+ 	"Action": [
+ 		"s3:DeleteObject",
+ 		"s3:GetObject",
+ 		"s3:PutObject",
+ 		"s3:PutObjectAcl",
+ 		"s3:ListBucket"
+ 	],
+ 	"Resource": [
+ 		"arn:aws:s3:::<bucket name>",
+ 		"arn:aws:s3:::<bucket name>/*",
+ 		"arn:aws:s3:::<bucket name>",
+ 		"arn:aws:s3:::<bucket name>/*"
+ 	]
+ }
+ ```
 
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+4.  Finally, you can save the bucket name, access key id, and secret access key to your hotglue settings, as pictured below:
+
+<Frame caption="hotglue job custom storage settings">
+![hotglue job storage settings](https://files.readme.io/063897b-Screen_Shot_2022-09-11_at_4.56.05_PM.png)
+</Frame>
