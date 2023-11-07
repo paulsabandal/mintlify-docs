@@ -1,8 +1,51 @@
 ---
 title: 'Widget settings'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Learn more about the widget settings'
 ---
 
-## Add some content
+The **widget page** allows you to change what your widget looks like and what your users can do with it. There are several options you can configure:
 
-Learn how to update your docs locally and and deploy them to the public.
+### Color
+
+Set a primary color for action buttons, hover effects, and other elements in the widget. Because the background and button text will be white, this color should be dark enough to provide accessible contrast.
+
+### Font Family
+
+Specify a font-family to use across the widget. You should start with the font-family you want and end with a generic family for the browser to fall back on.
+
+### Dark Theme
+
+By default, the widget uses a light theme with a white background. Toggling this option will display a dark widget instead.
+
+![](https://files.readme.io/8b14168-Screen_Shot_2022-09-11_at_4.57.52_PM.png)
+
+# Enable in-widget permissions for your users
+
+There are two ways to enable additional tabs and configuration in the widget. Some settings, like custom mapping and filters are designed to be dynamically configured in your embed code.
+
+Other options, like the ability to run jobs, are configured globally for your environment. By default, your users will only be able to unlink and re-configure credentials via the widget.
+
+### Run jobs
+
+This will show users a button to run a new sync job.
+
+### Run full sync jobs
+
+This will allow users to run a complete sync job
+
+<Warning>
+Note that this will clone _all_ historical data again. This can create duplicates in your target if you don't properly handle duplicated data in the script or target.
+</Warning>
+
+
+### Edit sync schedule
+
+This will allow users to modify the schedule on which their data is synced.
+
+### Edit field map
+
+This will allow users to modify the field map of what data they want to import from a specific integration.
+
+### View jobs history
+
+This will show users a new tab called Job History. This is a simplified list of a user's most recent jobs and the status of those jobs.
