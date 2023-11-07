@@ -1,8 +1,15 @@
 ---
 title: 'Allow multiple sources'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Allows tenants to connect to multiple distinct connectors in the same flow'
 ---
 
-## Add some content
+By default, users are limited to one linked connector per flow. This is because most users need just one integration for each category of connector you use (e.g. 1 CRM, 1 accounting system).
 
-Learn how to update your docs locally and and deploy them to the public.
+`multipleSources` ignores these limits and allows users to link multiple connectors in the same flow (e.g. Hubspot and Salesforce).
+
+## Syntax
+
+
+```javascript javascript
+  multipleSources: true   
+```
