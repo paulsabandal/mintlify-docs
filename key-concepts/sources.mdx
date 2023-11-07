@@ -3,6 +3,64 @@ title: 'Sources'
 description: 'Start building awesome documentation in under 5 minutes'
 ---
 
-## Add some content
+# What is a source?
 
-Learn how to update your docs locally and and deploy them to the public.
+Each connector that your users can import data from is called a **source**. Sources are grouped together within flows.
+
+For example, an e-commerce flow may include many different **sources**, such as Shopify, Amazon Seller, and WooCommerce.
+
+## What is an available source?
+
+An **available source** is a source that hotglue connects to. You can find a complete list of [available sources here](https://hotglue.com/connectors).
+
+## What is a supported source?
+
+A **supported source** is a source that you have configured to be available within a flow, whether or not any tenant has connected to it.
+
+## What is a linked source?
+
+A **linked source** is a source that has been successfully connected to by a particular tenant.
+
+# Source Configuration
+
+There are four source configuration options in the hotglue app:
+
+1.  Credentials
+2.  Field maps
+3.  Pre-processing scripts
+4.  Triggers
+
+## Credentials
+
+Sources generally use one of two types of authorization: APIs and OAuth. Before enabling an OAuth source, you must obtain and set up OAuth credentials.
+
+1.  Your **Client ID** and **Client Secret** will be found in your company or developer account with that source. Reference
+2.  Scope is used for some OAuth applications to define the data you will be reading or writing. This will prompt tenants to confirm the data permissions you are requesting.
+
+![](https://files.readme.io/3b50c42-Hotglue-Oauth-API-Credentials.png)
+
+## Field maps
+
+Field maps allow you to choose what data hotglue will clone in a sync job.
+
+**The field map** displays a list of **tables** that can be turned on or off. Within each table, **the field editor** displays a list of **fields** that can be cloned or ignored.
+
+To modify a field map for a source, navigate to your chosen flow, click the “Sources” tab, then select a source to configure it.
+
+![](https://files.readme.io/26fbbb6-Screen_Shot_2022-11-30_at_12.28.07_PM.png)
+
+Under configuration, click “customize field map.” From here, you can toggle **tables** on or off by clicking them.
+
+![](https://files.readme.io/6998ef5-Screen_Shot_2022-11-30_at_12.27.32_PM.png)
+
+Click the “edit” pencil button on a given table to add or remove fields.
+
+## Pre-processing script
+
+[Pre-processing scripts](https://docs.hotglue.com/docs/transformations-overview) (or transformation scripts) can be used to transform raw data from your sources into a digestible format for your backend or targets.
+
+## Triggers
+
+Triggers create webhooks on your behalf to automatically run jobs when something happens in a source system.
+
+For example, when a new contact is added in Salesforce, a trigger can automatically run a new sync job.
