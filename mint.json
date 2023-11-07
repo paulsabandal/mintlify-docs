@@ -109,6 +109,16 @@
       ]
     },
     {
+      "group": "Environment Settings",
+      "pages": [
+        "environment-settings/widget-settings",
+        "environment-settings/white-label",
+        "environment-settings/job-settings",
+        "environment-settings/webhooks",
+        "environment-settings/environment-variables"
+      ]
+    },
+    {
       "group": "CLI",
       "pages": [
         "cli/overview",
