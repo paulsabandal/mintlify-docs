@@ -1,22 +1,58 @@
 ---
 title: "Overview"
-description: "Example overview page before API endpoints"
+description: "A brief overview of the hotglue CLI and installation options"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+## What is the hotglue CLI?
 
-```bash
-'Authorization': 'Token <team_token>'
+[](https://docs.hotglue.com/docs/cli-overview#what-is-the-hotglue-cli)
+
+Rather than manage your hotglue configuration entirely through the UI, hotglue offers a CLI that makes it possible to manage your configuration programmatically. This way, you can check things like your transformation scripts into source control and deploy them via a CI pipeline following best development practices.
+
+The CLI also contains several utility functions to make working with hotglue easier. You can list tenants, flows, jobs, and even download jobs locally for debugging and testing.
+
+## Installation
+
+
+You can install the hotglue CLI directly from [npm](https://www.npmjs.com/package/@hotglue/cli).
+
+
+<Warning>
+### Node v16+ recommended
+hotglue CLI is built and tested against Node v16 and has **not** been designed to work for older versions. If you run into any unexpected issues try changing your Node version.
+
+</Warning>
+
+
+### Global (recommended)
+
+[](https://docs.hotglue.com/docs/cli-overview#global-recommended)
+
+We recommend installing the hotglue CLI globally, as shown below:
+
+```shell 
+ npm install -g @hotglue/cli
+ ```
+
+And then you can run it from anywhere using
+
+
+```shell 
+hotglue --help
+ ```
+
+### Project Folder
+
+[](https://docs.hotglue.com/docs/cli-overview#project-folder)
+
+Alternatively, you may install the hotglue CLI locally in a project folder using
+
+```shell 
+npm install --save-dev @hotglue/cli
 ```
 
-## API Tokens
+And then you can run the local installation from within that folder using
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
-
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
-
-### Permissions
-
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
-
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+```shell 
+npx hotglue
+```
