@@ -1,8 +1,17 @@
 ---
 title: 'Create metadata'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Define tenant metadata like name, industry, or contact'
 ---
 
-## Add some content
+`tenantMetadata` allows you to define additional data about your tenant, such as the company name
 
-Learn how to update your docs locally and and deploy them to the public.
+This will not be visible to your user. It is only accessible via the hotglue dashboard and API.
+
+## Syntax
+
+``` javascript javascript   
+tenantMetadata: {           
+  "Name": "Molot Industries",           
+  "Contact": "David Molot"         
+}   
+```
