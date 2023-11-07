@@ -1,8 +1,72 @@
 ---
 title: 'Configuration'
-description: 'Start building awesome documentation in under 5 minutes'
+description: ''
 ---
 
-## Add some content
+The hotglue CLI derives its configuration from two places: the **Profile config** and the **Project config**.
 
-Learn how to update your docs locally and and deploy them to the public.
+## Profile config
+
+
+The Profile config is stored in a `config.yaml` file located at `$HOME/.hotglue/`. At the moment, it is only used to store your `apikey`.
+
+## Project config
+
+The Project config is stored in a hotglue rc-like file and can be created anywhere in your project's folder structure. A Project settings file can hold any of the CLI's parameters (including overriding the apikey, although this is not recommended) and is used to define configuration values specific for that context.
+
+The configuration files can use any of the following names: `hotglue.yaml`, `.hotglue.yaml`, `.hotgluerc.yaml`, `.hotgluerc.yml`, `.hotgluerc`, `.hotgluerc.json`, `.hotgluerc.js`
+
+As the extensions suggest, the files support either yaml, json or js syntax (in case of JS, the config object has to be exported). However, we recommend using the yaml format.
+
+## Configure your environment
+
+[](https://docs.hotglue.com/docs/cli-configuration#configure-your-environment)
+
+### Set API Key
+
+[](https://docs.hotglue.com/docs/cli-configuration#set-api-key)
+
+To start, you'll need to get your **Personal API Key** from \_**[Account](https://hotglue.xyz/app/settings%5D) > Login & Security > Personal API Key\***, as shown below:
+
+![3068](https://files.readme.io/906edaa-Hotglue_personal_settings.png)
+
+### Personal API Key
+
+Once you have this, you can save the API Key to your **Profile config**
+
+`$ hotglue config set apikey <api key> Updating profile config file...Done`
+
+### Project settings
+
+[](https://docs.hotglue.com/docs/cli-configuration#project-settings)
+
+Once you have this done, you can create your Project config. For this example, I'll use the yaml syntax and a file named `.hotgluerc`. This config can include the following parameters:
+
+| Option | Description |
+| --- | --- |
+| `env` | Specify your hotglue **environment id** (ie. `dev.hotglue.acme.com`) |
+| `flow` | Specify your hotglue **flow id** (ie. `MDKdfumqM`) |
+| `tap` | Specify the **tap** to use for the hotglue commands. (ie. `salesforce`) |
+| `tenant` | Optional. The **tenant id** to use for the commands. Defaults to `default`, the admin config. |
+
+Here's a sample config, based on the examples listed above:
+
+.hotgluerc
+
+```shell 
+  env: dev.hotglue.acme.com flow: MDKdfumqM tap: salesforce 
+```
+
+You can now verify your config was created successfully using the `hotglue config` command:
+
+`
+$ hotglue config ┌─────────┬───────────────────────────┬─────────────────────────────────────────┬─────────┐ │ Setting │ Value                     │ Config File                             │ Type    │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ apikey  │ ************************  │ /.hotglue/config.yaml                   │ Profile │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ env     │ dev.hotglue.acme.com      │ .hotgluerc                              │ Project │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ flow    │ MDKdfumqM                 │ .hotgluerc                              │ Project │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ tap     │ salesforce                │ .hotgluerc                              │ Project │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ tenant  │ default                   │ .hotgluerc                              │ Project │ └─────────┴───────────────────────────┴─────────────────────────────────────────┴─────────┘`
+`
+
+## Project structure
+
+[](https://docs.hotglue.com/docs/cli-configuration#project-structure)
+
+When developing transformation scripts, we recommend a project structure similar to the following, so you can easily deploy scripts for multiple sources with ease. Note that each folder contains a unique `.hotgluerc` which reference different sources (and can even reference different flows).
+
+`├── salesforce │   ├── etl.ipynb │   └── .hotgluerc ├── hubspot │   ├── etl.ipynb │   └── .hotgluerc ├── pipedrive │   ├── etl.ipynb │   └── .hotgluerc`
