@@ -3,6 +3,60 @@ title: 'Custom field mapping'
 description: 'Start building awesome documentation in under 5 minutes'
 ---
 
-## Add some content
+# Behavior
 
-Learn how to update your docs locally and and deploy them to the public.
+
+Custom field mapping allows your users to map fields in their connected system to your data model.
+
+Your users will see your app's schema on the left, and available fields in their source system on the right.
+
+![](https://files.readme.io/c76c847-Screen_Shot_2023-04-09_at_8.04.47_PM.png)
+
+# Uses
+
+
+-   Fetch available custom fields in your customer's external system without creating new custom fields in your app.
+-   Define schemas tenant-by-tenant for granular control over mapping.
+
+<Info>
+If you need to fetch custom fields, hotglue will first need to fetch available fields in your user's account (a "discover"). There are two ways to do this, both of which can be turned on in your jobs settings:
+-   Trigger a discover when your user links.
+-   Force a discover on every job
+</Info>
+
+# Syntax
+
+[](https://docs.hotglue.com/docs/schemas#syntax)
+
+Pass the `schemas` object as an option to the hotglue widget. There are three parameters in this object:
+
+-   **FlowId**: The shortcode for your flow
+-   **schema.table**: The name of the table inside your system. This can be any string.
+-   **Your data model's field `id`** and `name`: The `id` is the field name in your data model, as a string. The `name` is a user-friendly string that is familiar to your users.
+
+Javascript
+
+``` javascript javascript  
+{
+  "schemas": [
+    {
+      "flowId": "flowId",
+      "schema": [
+        {
+          "table": "Leads",
+          "fields": [
+            {
+              "id": "interest",
+              "name": "Interest Level"
+            },
+            {
+              "id": "cat",
+              "name": "Test Company category"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+  ```
