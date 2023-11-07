@@ -1,22 +1,210 @@
 ---
 title: "Overview"
-description: "Example overview page before API endpoints"
+description: "The hotglue widget allows you to offer native, inline integrations in your app with a few lines of code."
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+# Introduction to the widget
 
-```bash
-'Authorization': 'Token <team_token>'
+
+The hotglue widget is a white-labeled component that allows your users to integrate instantly, without leaving your app. You can embed the widget using a few lines of [Javascript](https://docs.hotglue.com/docs/embed-hotglue) or [React](https://docs.hotglue.com/docs/embed-hotglue).
+
+<Frame caption="The pop-up widget can be opened with Vanilla Javascript, React, or Next.js">
+![](https://files.readme.io/fea0655-Screen_Shot_2023-03-17_at_11.28.28_PM.png)
+</Frame>
+
+<Frame caption="The inline **Connections Component** can be used via React or Next.js">
+![](https://files.readme.io/be6fcf0-Screen_Shot_2023-03-17_at_11.22.37_PM.png)
+</Frame>
+
+
+* * *
+
+# Installation (React)
+
+
+## Install the @hotglue/widget package
+
+
+If your project is built in React, you can install the [@hotglue/widget](https://www.npmjs.com/package/@hotglue/widget) package.
+
+using npm
+
+  ```
+  npm install @hotglue/widget
+  ```
+
+or using yarn
+
+  ```
+  yarn add @hotglue/widget
+  ```
+
+## Launch the widget
+
+First you must include the `HotglueConfig` provider as a higher order component in your React app. For example, in `index.js`:
+
+``` javascript index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import HotglueConfig from '@hotglue/widget';
+
+ReactDOM.render(
+  <HotglueConfig
+    config={{
+      apiKey: 'your-public-environment-api-key',
+      envId: 'your-env-id'
+    }}
+  >
+    <App />
+  </HotglueConfig>,
+  document.getElementById('root')
+);
+
 ```
 
-## API Tokens
+Now you can launch the widget using the `useHotglue` hook:
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+``` javascript App.js
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
+import { useHotglue } from '@hotglue/widget';
 
-### Permissions
+const App = (props) => {
+  const { openWidget } = useHotglue();
 
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
+  return <div>
+    <button onClick={() => openWidget("test-user")}>Open widget</button>
+  </div>
+}
 
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+export default App;
+
+```
+
+You can also use the [Connections component](https://docs.hotglue.com/docs/connections) if you want to use the widget inline rather than in a modal.
+
+# Installation (Next.js)
+
+
+Just like above, begin by installing the [@hotglue/widget](https://www.npmjs.com/package/@hotglue/widget) package
+
+using npm
+
+  ```
+  npm install --save @hotglue/widget
+  ```
+
+or yarn
+
+  ```
+  yarn add @hotglue/widget
+  ```
+
+Import `HotglueConfig` on your page and configure it.
+
+
+``` javascript next.js
+
+import dynamic from 'next/dynamic'
+const HotglueConfig = dynamic(() => import('@hotglue/widget'), { ssr: false })
+export default function Home() {
+	return (
+		<div className={styles.container}>
+			<HotglueConfig
+				config={{
+					apiKey: 'ADCgzXQpsj2aaPwzaDX0p3a33M0pUS88kmlnVvwe',
+					envId: 'dev.yjzx.hotglue.gmail.com'
+				}}
+				>
+				<HomeComponent />
+			</HotglueConfig>
+		</div>
+	)}
+```
+
+Create the `HomeComponent`. Inside of it you can launch the widget using the useHotglue hook:
+
+``` javascript next.js
+
+import { useHotglue } from '@hotglue/widget'
+
+const HomeComponent = (props, ref) => {
+	const { openWidget } = useHotglue()
+	
+	const handleOpenWidget = (tenant) => {
+		openWidget(tenant)
+	}
+	
+	return (
+		<div>
+			<button onClick={() => handleOpenWidget('test-user')}>
+				openWidget as test-user
+			</button>
+		</div>)
+}
+
+export default HomeComponent
+```
+
+
+You can also use the `connections` component.
+
+``` javascript next.js
+import dynamic from 'next/dynamic'
+const HotglueConfig = dynamic(() => import('@hotglue/widget'), { ssr: false })
+import { Connections } from '@hotglue/widget'
+export default function Home() {
+	
+	return (
+		<div>
+			<HotglueConfig
+				config={{
+					apiKey: 'ADCgzXQpsj2aaPwzaDX0p3a33M0pUS88kmlnVvwe',
+					envId: 'dev.yjzx.hotglue.gmail.com',
+				}}
+				>
+				<Connections tenant='test-user' />
+			</HotglueConfig>
+		</div>
+	)
+}
+```
+
+# Installation (Vanilla JavaScript)
+
+[](https://docs.hotglue.com/docs/embed-hotglue#installation-vanilla-javascript)
+
+##
+
+1\. Call and mount the widget
+
+[](https://docs.hotglue.com/docs/embed-hotglue#1-call-and-mount-the-widget)
+
+The first step of embedding hotglue is to add the widget to your web app. Simply copy the code generated from the hotglue environment dashboard into your HTML `head` tag.
+
+**Default method**
+
+**Async method**
+
+##
+
+2\. Launch the widget
+
+[](https://docs.hotglue.com/docs/embed-hotglue#2-launch-the-widget)
+
+**_Option 1 - HotGlue.link()_**
+
+Now that the hotglue widget is installed in your web app, open the widget by calling `HotGlue.link(<tenant id>, <flow id>, <source>, <preloaded>, <options>)`. In the example below, we also use `options` to hide the back button and add a listener to close the widget once the source is successfully linked.
+
+HTML
+
+`<script>     function launchHGSource() {         // Set the tenantId, flowId, and sourceId variables below         HotGlue.link(tenantId, flowId, sourceId, false, {           hideBackButtons: true,           listener: {             onSourceLinked: () => {               HotGlue.close();             }           }         })     } </script>  <button onclick="launchHGSource()">     <span>Open specific source</span> </button>`
+
+**_Option 2 - HotGlue.open()_**
+
+Alternatively, you can open the widget "flows" menu by calling `HotGlue.open(<tenant id>)`
+
+HTML
+
+`   <script>     function launchHG() {         // change "tenant-id" to the id of the current user         HotGlue.open('test-user-id', {});     } </script> <button onclick="launchHG()">     <span>Open hotglue widget</span> </button>   `
