@@ -1,22 +1,76 @@
 ---
 title: "Webhooks"
-description: "Example overview page before API endpoints"
+description: "Integrate hotglue with your own workflow by configuring a webhook"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+# Webhooks
 
-```bash
-'Authorization': 'Token <team_token>'
+Integrate hotglue with your own workflow by configuring a webhook
+
+# Configure the webhook
+
+To configure a webhook for your environment, head to the environment settings and set the webhook options. There are two fields:
+
+| Name | Description |
+| --- | --- |
+| Webhook URL | This is the webhook endpoint you want hotglue to send POST requests to |
+| Webhook Secret | Optional - if provided, hotglue will generate a signature of every payload using this secret and include it as the `X-Hub-Signature` in the request headers. Used to verify the payload is from hotglue. |
+
+# Webhook payload
+
+hotglue will send a webhook POST request to your hook every time a job moves forward in the job lifecycle. You can read about the [job lifecycle here](https://docs.hotglue.com/docs/jobs-lifecycle).
+
+## Example payload
+
+``` json JSON
+
+{
+  "job_id": "16FzN",
+  "env_id": "dev.dummy.hotglue.xyz",
+  "flow_id": "l8odS2mce",
+  "job_name": "test_job:kr8J8ks-u",
+  "tenant": "default",
+  "started_by": "default",
+  "s3_root": "default/flows/l8odS2mce/jobs/16FzN",
+  "start_time": "2020-12-30T20:29:21.614299+00:00",
+  "state": {},
+  "tap": "quickbooks:sandbox",
+  "status": "JOB_COMPLETED",
+  "task_id": "dab752626e3944db960b7c9cc9ab3a25",
+  "last_updated": "2020-12-30T20:31:00.081282+00:00"
+}
+
 ```
 
-## API Tokens
+# Validating the signature
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+If you've chosen to set a webhook secret, we will send an `X-Hub-Signature` in the request headers to your webhook URL. The purpose of this is to verify that the payload came from hotglue.
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
+See below for sample logic for how to validate the signature using JavaScript.
 
-### Permissions
 
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
+``` javascript webhook-verification.js
+// Get the X-Hub-Signature header
+const signature = req.normalizedHeaders['x-hub-signature'];
+// Get the payload of the webhook as a string
+const payload = typeof req.rawBody == "object" ? JSON.stringify(req.rawBody) : req.rawBody;
+// Get your webhook secret
+const secret = hotGlue.webhookSecret;
 
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+// Compute the signature using the above parameters
+const computedSignature = crypto.createHmac('sha1', secret).update(payload).digest("hex");
+
+const checksum = Buffer.from(signature, 'utf8');
+const newChecksum = Buffer.from(computedSignature, 'utf8');
+
+// Verify that the signature matches the X-Hub-Signature that was passed to you
+if (checksum.length !== computedSignature.length || !crypto.timingSafeEqual(newChecksum, checksum)) {
+  // This signature is invalid, and was not sent by hotglue
+  console.error("Unable to verify Signature " + payload);
+  return false;
+}
+
+// The signature was valid, it is safe to act on this webhok payload
+console.log("Verified Payload Signature !");
+return true;
+ ```
