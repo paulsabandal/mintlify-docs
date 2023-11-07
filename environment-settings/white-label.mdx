@@ -1,22 +1,31 @@
 ---
 title: "White-label"
-description: "Example overview page before API endpoints"
+description: "Fully white label your user OAuth experience"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+The callback URI is also known as a redirect URI or a callback URL. It is an essential part of OAuth, as it allows Hotglue to obtain the necessary tokens to access your user's resources. Hotglue's default callback URL is:
 
-```bash
-'Authorization': 'Token <team_token>'
-```
+`https://hotglue.com/callback`
 
-## API Tokens
+For OAuth integrations, your users will briefly view this page after they authenticate with the external system.
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+## Callback Image
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
 
-### Permissions
+This is the recommended and fastest way to white-label your callback page. This can be a branded loader or static image, which will briefly be displayed in the middle of the page. Any standard image file may be used, including PNG, JPEG, SVG, or GIF.
 
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
+## Redirect URL
 
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+You can also choose a unique redirect URL that you own for your callback page. For example, `integrations.{{YOURDOMAIN}}.com` instead of `hotglue.com/callback`.Once you choose that, we’ll give you two CNAMEs to add to your DNS.
+
+Note that you will have to update the redirect URIs in any OAuth apps after this is set.
+
+## Favicon
+
+Use this field to point to any 16x16 pixels image file.
+
+## Site Name
+
+Optionally override the site name for your callback URL.
+
+
