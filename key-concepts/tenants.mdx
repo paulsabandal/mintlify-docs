@@ -1,8 +1,37 @@
 ---
 title: 'Tenants'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'What are tenants?'
 ---
 
-## Add some content
+## What is a tenant?
 
-Learn how to update your docs locally and and deploy them to the public.
+A **tenant** is one of your customers that has connected at least one integration via hotglue.
+
+## What is an active tenant?
+
+An **active tenant** is any tenant that has had at least one sync job run within the last month. Learn more about [how active tenants relates to billing in our help center](https://help.hotglue.com/help/active-tenants).
+
+Learn more about tenants and how they are used in the walkthrough below:
+
+<iframe
+  width="670"
+  height="435"
+  src="https://www.loom.com/embed/5b7713c84a2b42eb9c35287fe52c5160?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+
+## What is a subtenant?
+
+**Subtenants** are used when a single tenant needs multiple distinct connections with the same connector. E.g.
+
+- A Shopify connection with multiple stores
+- A parent company with multiple CRMs for various acquired companies
+
+Subtenants are denoted as `{ROOT TENANT}){SUB TENANT ID}` (e.g., `companyName_2` ).
+
+## Creating a subtenant
+
+Subtenants must be created via the API, by making a call using the`{ROOT TENANT}_{SUB TENANT ID}` syntax.
