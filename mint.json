@@ -87,7 +87,14 @@
         {
           "group": "Options",
           "pages": [
-            "embedded-widget/options/life-cycle"
+            "embedded-widget/options/allow-multiple-sources",
+            "embedded-widget/options/create-metadata",
+            "embedded-widget/options/custom-field-mapping",
+            "embedded-widget/options/filter",
+            "embedded-widget/options/hide-back-buttons",
+            "embedded-widget/options/listener",
+            "embedded-widget/options/override-default-text",
+            "embedded-widget/options/skip-to-flow"
           ]
         }
       ]
