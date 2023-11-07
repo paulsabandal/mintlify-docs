@@ -1,8 +1,52 @@
 ---
 title: 'Override default text'
-description: 'Start building awesome documentation in under 5 minutes'
+description: '`localization` overrides default headers, captions, and buttons in the widget'
 ---
 
-## Add some content
+Define custom or branded text inside the widget.
 
-Learn how to update your docs locally and and deploy them to the public.
+
+## Syntax
+
+``` javascript Javascript
+localization: {
+    "startingScreen": {
+        "header": "Add a Title Here",
+        "subtitle": "Put some caption here"
+    },
+    "connectSourceScreen": {
+        "instructionText": "Link your account below",
+        "connectDataButtonText": "Link my account now",
+        "saveConfigurationButtonText": "Save my configuration"
+    },
+    "copySourceScreen": {
+        "header": "Duplicate the same setup from this flow?",
+        "actionButton": "No, I'll use a different account"
+    },
+    "quickActions": {
+        "runJobsTitle": "Run Jobs",
+        "runJobsSubtitle": "Some instructions for your users to run jobs",
+        "editFieldMapTitle": "Field Map Editor",
+        "editFieldMapSubtitle": "Some instructions for your users to edit Field Map",
+        "reconnectTitle": "Reconnect Source",
+        "reconnectSubtitle": "Some instructions for your users to reconnect the source",
+        "editScheduleTitle": "Edit Time of Sync",
+        "editScheduleSubtitle": "Some instructions for your users to edit sync schedule",
+        "unlinkTitle": "Unlink Source",
+        "unlinkSubtitle": "Some instructions for your users to unlink the source"
+    },
+    "jobHistory": {
+        "noJobsCaption": "Add text to guide user/s to run jobs!"
+    },
+    "searchSource": {
+        "searchSourceText": "Search App",
+        "noSourceCaption": "Add text if there is no source upon search",
+        "noSourceAvailableCaption": "There are no source for this flow, try add on the dashboard"
+    },
+    "searchTarget": {
+        "searchTargetText": "Search Target App",
+        "noTargetCaption": "Add text if there is no target upon search",
+        "noTargetAvailableCaption": "There are no target for this flow, try add on the dashboard"
+    }
+}
+```
