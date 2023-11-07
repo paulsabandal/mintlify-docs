@@ -3,20 +3,57 @@ title: "Environment Variables"
 description: "Example overview page before API endpoints"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+## Overview
 
-```bash
-'Authorization': 'Token <team_token>'
+
+Environment variables in Hotglue allow you to dynamically configure various settings that your ETL transformation scripts can utilize. This enables easier maintenance and scaling of your integration tasks. Commonly, environment variables are used for API URLs, export formats, and other dynamic settings.
+
+* * *
+
+## Accessing the Environment Variables Setting Page
+
+1.  Log in to your Hotglue account.
+2.  Navigate to the **Settings** tab on the sidebar.
+3.  Click on the **Environment Variables** option.
+
+* * *
+
+## Adding Environment Variables
+
+
+To add an environment variable:
+
+1.  Navigate to the **Environment Variables** setting page.
+2.  Add a **Key** and **Value** for your variable.
+3.  Click **Save** to create the new variable.
+4.  You can always click the ✎ **pencil** icon to edit an existing variable
+* * *
+
+## Default Environment Variables
+
+
+### DEFAULT\_EXPORT\_FORMAT
+
+-   **Description**: Defines the default export format for all ETL transformation scripts.
+-   **Accepted Values**: `json`, `csv`, `parquet`
+
+## Usage in ETL Transformation Scripts
+
+To use environment variables in your ETL transformation scripts, you can utilize the `os.environ` Python library as shown below:
+
+``` python Python
+import os
+
+api_url = os.environ.get('API_URL')
+
 ```
 
-## API Tokens
+* * *
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
+## Best Practices
 
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
 
-### Permissions
-
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
-
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+-   **Naming Convention**: Use all upper-case letters and underscores to define variable names (e.g., `API_URL`).
+-   **Default Values**: Always include default values in your ETL scripts for environment variables when applicable.
+-   **Validation**: Implement validation checks in your ETL scripts to ensure that environment variables contain expected types and values.
+-   **Consistency**: Use consistent naming and value types across multiple environment variables to make the system more intuitive and easier to manage.
