@@ -1,8 +1,17 @@
 ---
 title: 'Listener'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Object specifying any listeners to apply'
 ---
 
-## Add some content
+`listener`
 
-Learn how to update your docs locally and and deploy them to the public.
+## Syntax
+
+[](https://docs.hotglue.com/docs/filter#syntax)
+
+``` javascript javascript
+listener: {
+  onSourceLinked:
+  (source, flow) => console.log(JSON.stringify(source))
+}
+```
