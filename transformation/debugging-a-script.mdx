@@ -1,8 +1,83 @@
 ---
 title: 'Debugging a script'
-description: 'Start building awesome documentation in under 5 minutes'
+description: ''
 ---
 
-## Add some content
+## Before you start
 
-Learn how to update your docs locally and and deploy them to the public.
+
+This guide assumes you have already launched a JupyterLab workspace, as described in the [Transformations Overview](https://docs.hotglue.com/docs/transformations-overview#start-the-jupyterlab-workspace).
+
+## Access prior job logs and data
+
+If you're debugging why a specific job failed, you can learn more about what caused a job to fail by reading the logs.
+
+To start, navigate to the job that failed (this could be under a specific tenant):
+
+![](https://files.readme.io/0c837cf-Screen_Shot_2022-12-27_at_3.02.05_PM.png)
+
+By clicking the download icon next to the job, a zip file will be generated containing the raw data that was was generated during that job. The directory structure is exactly the same as described on [the transformation script docs](https://docs.hotglue.com/docs/writing-a-basic-script#standard-directories).
+
+By clicking the job name, you can access the logs and understand any errors that may have occurred:
+
+<Frame caption="Job logs + the 'down' arrow to view more recent logs">
+![Job logs + the "down" arrow to view more recent logs](https://files.readme.io/505b035-Screen_Shot_2022-12-27_at_3.04.13_PM.png)
+
+</Frame>
+
+<Tip>
+### **Find errors quickly**
+To speed up debugging, click the down arrow to quickly scan to the most recent logs.
+</Tip>
+
+## Clone a job
+
+
+While in a JupyterLab workspace, you can **clone** the data from a prior job. This is especially useful if you're debugging a specific job that failed, or you need some testing data to develop a script.
+
+Inside of Jupyter, select the hotglue tab and press clone job.
+
+
+<Frame caption="Select clone job">
+![3068](https://files.readme.io/9700d02-Screen_Shot_2021-12-15_at_4.02.21_PM.png "Screen Shot 2021-12-15 at 4.02.21 PM.png")
+</Frame>
+
+Jupyter will present you with a list of the most recent jobs. Press select on the one you would like to clone.
+
+<Frame caption="Choose which job to clone">
+![3068](https://files.readme.io/1360e6c-Screen_Shot_2021-12-15_at_4.03.55_PM.png "Screen Shot 2021-12-15 at 4.03.55 PM.png")
+</Frame>
+
+Once the data is cloned, you'll see a success message as below, and the data will be populated in the `sync-output` folder.
+
+<Frame caption="Job clone success">
+![3068](https://files.readme.io/9e6f6b1-Screen_Shot_2021-12-15_at_4.04.34_PM.png)
+</Frame>
+
+You can preview the data that was cloned in JupyterLab by opening the `sync-output` folder. As you can see, my `subscribe_list` data was cloned:
+
+<Frame caption="Preview cloned data">
+![3068](https://files.readme.io/3a4d04c-Screen_Shot_2021-12-15_at_4.04.57_PM.png "Screen Shot 2021-12-15 at 4.04.57 PM.png")
+
+</Frame>
+
+## Test the script
+
+Now that your data is cloned, you can run your transform script normally and it should pick up the data automatically.
+
+<Frame caption="Run entire transformation script">
+![3068](https://files.readme.io/4bc1a19-Screen_Shot_2021-12-15_at_4.08.39_PM.png "Screen Shot 2021-12-15 at 4.08.39 PM.png")
+</Frame>
+
+
+If your script fails, you will see the error in the notebook (`etl.ipynb`). From there, you can change your script and run against the data again.
+
+When your script works correctly, you should see the output files in the `etl-output` folder:
+
+
+<Frame caption="Transformation script output">
+![3068](https://files.readme.io/c18460c-Screen_Shot_2021-12-15_at_4.09.20_PM.png "Screen Shot 2021-12-15 at 4.09.20 PM.png")
+</Frame>
+
+
+That's all there is to testing your script in hotglue!
