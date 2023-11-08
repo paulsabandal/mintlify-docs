@@ -1,8 +1,210 @@
 ---
 title: 'Use the widget'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'useHotglue React hook reference'
 ---
 
-## Add some content
 
-Learn how to update your docs locally and and deploy them to the public.
+# Description
+
+
+The `useHotglue` is the primary way of using the `@hotglue/widget` package outside of the inline `Connections` component. Use this to launch the widget and access utility functions.
+
+# Usage
+
+First you must include the `HotglueConfig` provider as a higher order component in your React app. For example, in `index.js`:
+
+``` javascript index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import HotglueConfig from '@hotglue/widget';
+
+ReactDOM.render(
+  <HotglueConfig
+    config={{
+      apiKey: 'your-public-environment-api-key',
+      envId: 'your-env-id'
+    }}
+  >
+    <App />
+  </HotglueConfig>,
+  document.getElementById('root')
+);
+````
+
+Then you can use the `useHotglue` hook anywhere, as shown below:
+
+``` javascript App.js
+
+import { Connections } from '@hotglue/widget';
+
+const App = (props) => {
+   const { openWidget } = useHotglue();
+
+  return (
+    <div>
+        <button onClick={() => openWidget('test-user')}>Open</button>
+    </div>
+  );
+};
+
+export default App;
+
+```
+
+# Functions
+
+Below is a reference of all of the currently supported functions from the `useHotglue` hook.
+
+* * *
+
+# openWidget
+
+Opens the widget for a user with options.
+
+## Usage
+
+
+`HotGlue.openWidget(user id, options)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| options | `objects` | [option](https://docs.hotglue.com/docs/options) objects |
+
+* * *
+
+# link
+
+## Usage
+
+`HotGlue.link(user id, flow id, source, preloaded, options)`
+
+## Parameters
+
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| flow id | `string` | ID of flow you wish to connect. Every flow in hotglue has an ID which can be found from the admin panel or API. source |
+| source | `string` | ID of source you wish to connect – typically just the name of the source in lowercase. Full catalog is accessible via API. Ex. `salesforce` |
+| preloaded | `boolean` | Mark this flag as `true` if you used the `HotGlue.preload` function to improve load time. Defaults to `false` |
+| options | `object` | Object containing options to configure the form: `json { "helperText": "Need help finding credentials? [Read the docs](https://docs.hotglue.xyz)" }` |
+
+
+
+## Description
+
+If specified `source` is **not linked**, this will open a popup window for user to login
+If specified `source` is **linked**, this will open the hotglue widget under specified flow so user can manage the source.
+
+* * *
+
+# reconnect
+
+## Usage
+
+`HotGlue.reconnect(user id, flow id, entity id, options)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| flow id | `string` | ID of flow you wish to reconnect. Every flow in hotglue has an ID which can be found from the admin panel or API. source |
+| entity id | `string` | ID of source or target you wish to connect – typically just the name of the source in lowercase. Full catalog is accessible via API. Ex. `salesforce` |
+| options | `object` | Object containing options to configure the form: `json { "isTarget": false }` |
+
+## Description
+
+Used to reconnect an OAuth entities. Note for non-OAuth sources or targets, this will have no effect. In order to reconnect a target, you must pass the `isTarget` parameter to the `options` object.
+
+* * *
+
+# disconnect
+
+## Usage
+
+`HotGlue.disconnect(user id, flow id, entity id, options)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| flow id | `string` | ID of flow you wish to disconnect. Every flow in hotglue has an ID which can be found from the admin panel or API.
+source |
+| entity id | `string` | ID of source or target you wish to disconnect – typically just the name of the source in lowercase. Full catalog is accessible via API. Ex. `salesforce` |
+| options | `object` | Object containing options to configure the form: `json { "isTarget": false }` |
+
+## Description
+
+Used to disconnect an entity (source or target). Note you must pass the `isTarget` parameter to the `options` object if disconnecting a linked target.
+
+* * *
+
+# setListener
+
+
+## Usage
+
+`HotGlue.setListener(listener)`
+
+## Parameters
+
+
+| Name | Type | Description |
+| --- | --- | --- |
+| listener | `object` | Object containing all listeners. See list of available events below. ex. `{onSourceLinked: (source, flow) => console.log(JSON.stringify(source))}` |
+
+## Description
+
+Updates current listener configuration to specified listener object
+
+* * *
+
+# createJob
+
+## Usage
+
+`HotGlue.createJob(flowId, tenantId, startDate)`
+
+## Parameters
+
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `flowId` | `string` | Yes | ID of flow |
+| `tenantId` | `string` | Yes | ID of user |
+| `startDate` | `string` (ISO date) | No | Optional. Used to override start date of the job. ex: `2022-10-16T00:00:00Z` |
+
+## Response
+
+<Warning>
+Returns a Promise which must be awaited or assigned a callback to extract relevant data
+</Warning>
+
+``` json JSON
+{
+    "job_id": "lmaEbA",
+    "env_id": "dev.example-env.hotglue.xyz",
+    "job_name": "test_job:_V-vgdlLN",
+    "tenant": "default",
+    "started_by": "default",
+    "flow": "l8odS2mce",
+    "s3_root": "default/flows/l8odS2mce/jobs/lmaEbA",
+    "start_time": "2020-12-30T18:01:01.828266+00:00",
+    "state": {},
+    "tap": "quickbooks:sandbox",
+    "status": "ETL_FAILED",
+    "message": "ETL error...",
+    "last_updated": "2020-12-30T20:31:00.081282+00:00"
+}
+```
+
+## Description
+
+Convenience function wrapping the hotglue API to run a job for the user.
