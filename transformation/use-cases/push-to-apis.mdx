@@ -1,8 +1,114 @@
 ---
 title: 'Push to APIs'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Learn how to use the transformation scripts to push data directly to your API'
 ---
 
-## Add some content
+# Overview
 
-Learn how to update your docs locally and and deploy them to the public.
+This guide walks through how to leverage the transformation script to send data from a source directly to your API during a hotglue job. This should be used _instead_ of a target. We will be using the [Python requests library](https://requests.readthedocs.io/en/latest/) to do this.
+
+## Reasoning
+
+We recommend using the Python transformation script to connect with your API so you have more flexibility. You can:
+
+-   handle authorization (for example, you can read/write api keys for your tenants using [the tenant config](https://docs.hotglue.com/reference/tenants-set-config))
+-   do any mapping necessary to your internal schema
+-   manage the order requests are made in
+-   and more!
+
+# Setup your environment
+
+
+## Dependencies
+
+[](https://docs.hotglue.com/docs/transformations-push-to-apis#dependencies)
+
+The script we will walk through is tested with the following `requirements.txt` – if you have different behavior, verify your dependency versions match.
+
+``` txt requirements.txt
+gluestick==1.0.9
+numpy==1.16.2
+pandas==0.25.3
+requests==2.26.0
+```
+
+## Sample data
+
+
+For this example we will be working with some testing Mailchimp list members data. [Download the CSV here](https://drive.google.com/file/d/1Wc7EI15ya4QuGkdovZwWdy-3UzLzZG79/view?usp=sharing) to follow along.
+
+``` csv list_members.csv
+id,web_id,email_address,unique_email_id,email_type,status,unsubscribe_reason,merge_fields,stats,ip_signup,timestamp_signup,ip_opt,timestamp_opt,member_rating,last_changed,language,vip,email_client,location,source,tags_count,tags,list_id
+030d546fad14e050174131b92f9dfa4a,532598831,tony@starkindustries.com,41e3a84f8c,html,subscribed,,"{'FNAME': 'Tony', 'LNAME': 'Stark', 'ADDRESS': {'addr1': '', 'addr2': '', 'city': '', 'state': '', 'zip': '', 'country': 'US'}, 'PHONE': '', 'BIRTHDAY': ''}","{'avg_open_rate': 0.0, 'avg_click_rate': 0.0}",,,161.97.109.172,2022-05-16T15:45:03.000000Z,2.0,2022-05-16T15:45:03.000000Z,,False,,"{'latitude': 0.0, 'longitude': 0.0, 'gmtoff': 0, 'dstoff': 0, 'country_code': '', 'timezone': ''}",Admin Add,0,[],3b1252e2c4
+f9c278107a89812816ae8769c969bf3c,533108879,fury@avengers.org,211fb11bbb,html,unsubscribed,N/A (Unsubscribed by admin),"{'FNAME': 'Director', 'LNAME': 'Fury', 'ADDRESS': '', 'PHONE': '', 'BIRTHDAY': ''}","{'avg_open_rate': 0.0, 'avg_click_rate': 0.0}",,,188.43.235.177,2022-05-17T08:59:40.000000Z,1.0,2022-05-20T10:09:19.000000Z,,False,,"{'latitude': 0.0, 'longitude': 0.0, 'gmtoff': 0, 'dstoff': 0, 'country_code': '', 'timezone': ''}",Import,1,"[{'id': 12632599, 'name': 'promo'}]",3b1252e2c4
+```
+
+# Sample Script
+
+## Prepare the data
+
+Refer to the sample script below which:
+
+-   Reads the `list_members` CSV as pandas dataframe, and
+-   Does some light transformation on the data
+
+``` python etl.py
+# Import dependencies
+import gluestick as gs
+import pandas as pd
+import os
+import requests
+
+# Establish standard directories for hotglue
+ROOT_DIR = os.environ.get("ROOT_DIR", ".")
+INPUT_DIR = f"{ROOT_DIR}/sync-output"
+OUTPUT_DIR = f"{ROOT_DIR}/etl-output"
+
+# Read input data
+input_data = gs.read_csv_folder(INPUT_DIR)
+
+# Get the list members as a dataframe
+list_members = input_data.get("list_members", pd.DataFrame())
+
+# Explode personalized data
+list_members = gs.explode_json_to_rows(list_members, "merge_fields")
+
+# Select relevant columns
+list_members = list_members[['id', 'email_address', 'status', 'source', 'merge_fields.FNAME', 'merge_fields.LNAME', 'last_changed']]
+
+# Rename columns to standard names
+list_members.rename(columns={
+    "merge_fields.FNAME": "firstName",
+    "merge_fields.LNAME": "lastName"
+}, inplace=True)
+
+
+```
+
+
+## Send to the API
+
+
+Now that the data has been mapped to our schema, we can create a payload and POST it to our API. If you'd like to learn more about the requests library syntax, [visit their docs](https://requests.readthedocs.io/en/latest/).
+
+Refer to the sample script below:
+
+``` python etl.py
+# Create a payload that includes the contacts with some context on the hotglue job
+payload = {
+    "env_id": os.environ.get("ENV_ID"),
+    "job_id": os.environ.get("JOB_ID"),
+    "flow_id": os.environ.get("FLOW"),
+    "tenant": os.environ.get("TENANT"),
+    "tap": os.environ.get("TAP", "mailchimp"),
+    "contacts": list_members.to_dict(orient="records")
+}
+
+# Send to API endpoint
+endpoint_url = "https://api.acme.com/contacts"
+r = requests.post(endpoint_url, json=payload)
+
+# Log the result of the request
+print(r.status_code)
+
+```
