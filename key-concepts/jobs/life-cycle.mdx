@@ -1,8 +1,21 @@
 ---
 title: 'Life Cycle'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'hotglue job lifecycle explained'
 ---
 
-## Add some content
+hotglue job goes through several stages during the run. If you have a configured [webhooks](https://docs.hotglue.com/docs/jobs-webhooks) to receive job updates, you will receive a POST at each of these stages:
 
-Learn how to update your docs locally and and deploy them to the public.
+| Lifecycle Step | Description |
+| --- | --- |
+| `JOB_CREATED` | The job has been created and queued to run. |
+| `DISCOVER_STARTED` | The job has begun fetching available tables and fields to sync. |
+| `DISCOVER_FAILED` | There was a fatal error fetching the available data. |
+| `SYNC_STARTED` | Data has begun to sync from the tap. |
+| `SYNC_FAILED` | There was a fatal error while syncing data from the tap. |
+| `SYNC_SUCCESS` | Data was successfully synced from the tap. |
+| `ETL_STARTED` | Transformation script will run on synced data. |
+| `ETL_FAILED` | There was a fatal error while the transformation script was running. |
+| `ETL_SUCCESS` | Transformation script completed successfully. |
+| `EXPORT_STARTED` | Export to the defined targets for the flow has begun. |
+| `EXPORT_FAILED` | There was a fatal error while exporting the data to one of the defined targets. |
+| `JOB_COMPLETED` | Job has completed successfully, and executor is shutting down. |
