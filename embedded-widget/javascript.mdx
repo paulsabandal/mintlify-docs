@@ -1,8 +1,368 @@
 ---
 title: 'Javascript Reference'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Using the hotglue widget with plain JavaScript'
 ---
 
-## Add some content
+After [installing the widget](https://docs.hotglue.com/docs/embed-hotglue#installation-vanilla-javascript) using plain JavaScript, you can reference the `HotGlue` (or `window.HotGlue`) object and all the utility functions included in the widget.
 
-Learn how to update your docs locally and and deploy them to the public.
+This page is a reference of all the functions accessible from the `HotGlue` object exposed by the `widgetv2.js` script.
+
+# open
+
+
+## Usage
+
+`HotGlue.open(user id, options)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| options | `objects` | option objects |
+
+## Description
+
+Launches the hotglue widget for user with specified options.
+
+* * *
+
+# close
+
+## Usage
+
+`HotGlue.close()`
+
+## Description
+
+Closes the hotglue widget.
+
+* * *
+
+# preload
+
+## Usage
+
+`HotGlue.preload(user id, flow id)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| flow id | `string` | ID of flow you wish to connect. Every flow in hotglue has an ID which can be found from the admin panel or API. |
+
+## Description
+
+
+Preloads the relevant user/flow data for usage with the HotGlue.link function.
+
+* * *
+
+# link
+
+## Usage
+
+`HotGlue.link(user id, flow id, source, preloaded, options)`
+
+## Parameters
+
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| flow id | `string` | ID of flow you wish to connect. Every flow in hotglue has an ID which can be found from the admin panel or API. source |
+| source | `string` | ID of source you wish to connect – typically just the name of the source in lowercase. Full catalog is accessible via API. Ex. `salesforce` |
+| preloaded | `boolean` | Mark this flag as `true` if you used the `HotGlue.preload` function to improve load time. Defaults to `false` |
+| options | `object` | Object containing options to configure the form: `json { "helperText": "Need help finding credentials? [Read the docs](https://docs.hotglue.xyz)" }` |
+
+## Description
+
+If specified `source` is **not linked**, this will open a popup window for user to login
+If specified `source` is **linked**, this will open the hotglue widget under specified flow so user can manage the source.
+
+* * *
+
+# reconnect
+
+
+## Usage
+
+
+`HotGlue.reconnect(user id, flow id, entity id, options)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| flow id | `string` | ID of flow you wish to reconnect. Every flow in hotglue has an ID which can be found from the admin panel or API. source |
+| entity id | `string` | ID of source or target you wish to connect – typically just the name of the source in lowercase. Full catalog is accessible via API. Ex. `salesforce` |
+| options | `object` | Object containing options to configure the form: `json { "isTarget": false }` |
+
+## Description
+
+Used to reconnect an OAuth entities. Note for non-OAuth sources or targets, this will have no effect. In order to reconnect a target, you must pass the `isTarget` parameter to the `options` object.
+
+* * *
+
+# disconnect
+
+
+## Usage
+
+`HotGlue.disconnect(user id, flow id, entity id, options)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| user id | `string` | ID of current user of your application. |
+| flow id | `string` | ID of flow you wish to disconnect. Every flow in hotglue has an ID which can be found from the admin panel or API source |
+| entity id | `string` | ID of source or target you wish to disconnect – typically just the name of the source in lowercase. Full catalog is accessible via API. Ex. `salesforce` |
+| options | `object` | Object containing options to configure the form: `json { "isTarget": false }` |
+
+## Description
+
+Used to disconnect an entity (source or target). Note you must pass the `isTarget` parameter to the `options` object if disconnecting a linked target.
+
+* * *
+
+# setListener
+
+## Usage
+
+`HotGlue.setListener(listener)`
+
+## Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| listener | `object` | Object containing all listeners. See list of available events below.
+ex.
+`{onSourceLinked: (source, flow) => console.log(JSON.stringify(source))}` |
+
+## Description
+
+Updates current listener configuration to specified listener object
+
+* * *
+
+# getLinkedSources
+
+## Usage
+
+`HotGlue.getLinkedSources(flow id, user id)`
+
+## Parameters
+
+
+| Name | Type | Description |
+| --- | --- | --- |
+| flow id | `string` | ID of flow to query |
+| user id | `string` | ID of user to query |
+
+## Response
+
+[](https://docs.hotglue.com/docs/embed-hotglue-javascript-reference#response)
+
+<Warning>
+Returns a Promise which must be awaited or assigned a callback to extract relevant data
+</Warning>
+
+``` json JSON
+
+[{
+	"tap": "salesforce",
+	"domain": "salesforce.com",
+	"label": "Salesforce",
+	"icon": "https://s3.amazonaws.com/other.hotglue.xyz/images/salesforce.svg",
+	"tap_url": "https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=...",
+	"auth_url": "https://login.salesforce.com/services/oauth2/token",
+	"type": "oauth",
+	"description": "Enable your customers to sync CRM data (Leads, Sales, etc.) directly from Salesforce using hotglue.",
+	"client_id": "...",
+	"fieldMap": {}
+}]
+
+```
+
+## Description
+
+Convenience function wrapping the hotglue API to check if user has linked sources.
+
+* * *
+
+# createJob
+
+## Usage
+
+`HotGlue.createJob(flowId, tenantId, startDate)`
+
+## Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `flowId` | `string` | Yes | ID of flow |
+| `tenantId` | `string` | Yes | ID of user |
+| `startDate` | `string` (ISO date) | No | Optional. Used to override start date of the job. ex: `2022-10-16T00:00:00Z` |
+
+## Response
+
+<Warning>
+Returns a Promise which must be awaited or assigned a callback to extract relevant data
+</Warning>
+
+``` json JSON
+{
+    "job_id": "lmaEbA",
+    "env_id": "dev.example-env.hotglue.xyz",
+    "job_name": "test_job:_V-vgdlLN",
+    "tenant": "default",
+    "started_by": "default",
+    "flow": "l8odS2mce",
+    "s3_root": "default/flows/l8odS2mce/jobs/lmaEbA",
+    "start_time": "2020-12-30T18:01:01.828266+00:00",
+    "state": {},
+    "tap": "quickbooks:sandbox",
+    "status": "ETL_FAILED",
+    "message": "ETL error...",
+    "last_updated": "2020-12-30T20:31:00.081282+00:00"
+}`
+```
+
+## Description
+
+Convenience function wrapping the hotglue API to run a job for the user.
+
+* * *
+
+# hasMounted
+
+## Usage
+
+`HotGlue.hasMounted()`
+
+## Description
+
+Returns `true` if the widget has mounted and is ready for use. `false` otherwise.
+
+* * *
+
+## listener
+
+List of available events in hotglue, which are passed as standard JavaScript functions.
+
+### onWidgetOpen
+
+Signature `()`
+
+### onWidgetClose
+
+Signature `()`
+
+### onPopupClose
+
+Signature `(id, flow_id)`
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | `string` | ID of source/target being linked |
+| flow id | `string` | ID of flow being linked |
+
+
+### onTargetLinked
+
+Signature `(target, flow_id)`
+
+| Name | Type | Description |
+| --- | --- | --- |
+| target | `object` | The target that has been linked. Follows same response structure as linked targets API |
+| flow id | `string` | ID of flow that has been linked |
+
+
+### onSourceLinked
+
+Signature `(source, flow_id)`
+
+| Name | Type | Description |
+| --- | --- | --- |
+| source | `object` | The source that has been linked. Follows same response structure as ​linked sources API |
+| flow id | `string` | ID of flow that has been linked |
+
+### onSourceLinkCanceled
+
+Signature `(tap, flow_id)`
+
+| Name | Type | Description |
+| --- | --- | --- |
+| tap | `string` | ID of source |
+| flow id | `string` | ID of flow |
+
+### onSourceUnlinked
+
+Signature `(source, flow_id)`
+
+| Name | Type | Description |
+| --- | --- | --- |
+| source | `object` | The source that has been unlinked. Follows same response structure as ​ linked sources API |
+| flow id | `string` | ID of flow that has been unlinked |
+
+### onStartJob
+
+Signature `(tap_id, flow_id, user_id)`
+
+| Name | Type | Description |
+| --- | --- | --- |
+| tap\_id | `string` | ID of source the job is running for |
+| flow\_id | `string` | ID of flow source is linked under |
+| user\_id | `string` | ID of user who started job |
+
+* * *
+
+## localization
+
+Object specifying localization overrides for text in the widget.
+
+``` json JSON
+{
+    "startingScreen": {
+        "header": "Add a Title Here",
+        "subtitle": "Put some caption here"
+    },
+    "connectSourceScreen": {
+        "instructionText": "Link your account below",
+        "connectDataButtonText": "Link my account now",
+        "saveConfigurationButtonText": "Save my configuration"
+    },
+    "copySourceScreen": {
+        "header": "Duplicate the same setup from this flow?",
+        "actionButton": "No, I'll use a different account"
+    },
+    "quickActions": {
+        "runJobsTitle": "Run Jobs",
+        "runJobsSubtitle": "Some instructions for your users to run jobs",
+        "editFieldMapTitle": "Field Map Editor",
+        "editFieldMapSubtitle": "Some instructions for your users to edit Field Map",
+        "reconnectTitle": "Reconnect Source",
+        "reconnectSubtitle": "Some instructions for your users to reconnect the source",
+        "editScheduleTitle": "Edit Time of Sync",
+        "editScheduleSubtitle": "Some instructions for your users to edit sync schedule",
+        "unlinkTitle": "Unlink Source",
+        "unlinkSubtitle": "Some instructions for your users to unlink the source"
+    },
+    "jobHistory": {
+        "noJobsCaption": "Add text to guide user/s to run jobs!"
+    },
+    "searchSource": {
+        "searchSourceText": "Search App",
+        "noSourceCaption": "Add text if there is no source upon search",
+        "noSourceAvailableCaption": "There are no source for this flow, try add on the dashboard"
+    },
+    "searchTarget": {
+        "searchTargetText": "Search Target App",
+        "noTargetCaption": "Add text if there is no target upon search",
+        "noTargetAvailableCaption": "There are no target for this flow, try add on the dashboard"
+    }
+}
+```
