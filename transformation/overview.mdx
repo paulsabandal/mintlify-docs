@@ -30,31 +30,33 @@ Generally, when updating the transformation script you should launch the Jupyter
 
 hotglue will provision a hosted JupyterLab workspace for you to connect to – this may take a few minutes. Once the JupyterLab workspace is provisioned, click the launch button to open your workspace.
 
-![Connect to JupyterLab workspace](https://files.readme.io/00ef48d-Screen_Shot_2022-12-26_at_6.47.36_PM.png)
+<Frame caption="Connect to JupyterLab workspace">
+![Connector configuration screen](https://files.readme.io/16aa095-Screen_Shot_2022-12-26_at_6.49.33_PM.png)
+</Frame>
 
-Connect to JupyterLab workspace
+You've launched JupyterLab and should see something like the below!  🎉
 
-You've launched JupyterLab and should see something like the below! ![:tada:](https://docs.hotglue.com/public/img/emojis/tada.png ":tada:")
 
+<Frame caption="JupyterLab">
 ![3068](https://files.readme.io/194d16c-Screen_Shot_2021-12-15_at_2.25.46_PM.png "Screen Shot 2021-12-15 at 2.25.46 PM.png")
+</Frame>
 
-JupyterLab
+<Note>
 
-> 📘
->
-> Note that JupyterLab workspaces will timeout after 30 minutes of inactivity, at which point you'll need to start a new workspace. When your session times out, your script is autosaved.
+Note that JupyterLab workspaces will timeout after 30 minutes of inactivity, at which point you'll need to start a new workspace. When your session times out, your script is autosaved.
 
-##
+</Note>
 
-Define dependencies
-
-[](https://docs.hotglue.com/docs/transformations-overview#define-dependencies)
+## Define dependencies
 
 The `requirements.txt` file in the root directory is where you can specify any Python modules you wish to use as dependencies. In this example, my `requirements.txt` contains the following:
 
-requirements.txt
-
-`gluestick==1.0.4 numpy==1.16.2 pandas==0.25.3 requests==2.24.0`
+``` shell requirements.txt
+gluestick==1.0.4 
+numpy==1.16.2 
+pandas==0.25.3 
+requests==2.24.0
+```
 
 As mentioned above the [gluestick](https://github.com/hotgluexyz/gluestick) package is developed by the hotglue team and provides utility functions for reading and manipulating CSV files with pandas. Read the [wiki on GitHub](https://github.com/hotgluexyz/gluestick/wiki).
 
@@ -62,42 +64,44 @@ The [requests](https://docs.python-requests.org/en/latest/) package can be use
 
 ![](https://files.readme.io/17a8a77-Screen_Shot_2021-12-15_at_2.26.26_PM.png "Screen Shot 2021-12-15 at 2.26.26 PM.png")
 
-##
-
-Edit the script
+## Edit the script
 
 [](https://docs.hotglue.com/docs/transformations-overview#edit-the-script)
 
 Inside the `etl` folder, you will find a file titled `etl.ipynb` containing a [default transformation script](https://github.com/hotgluexyz/recipes/blob/master/src/default.ipynb)
 
-![3068](https://files.readme.io/f530f18-Screen_Shot_2021-12-15_at_2.31.18_PM.png "Screen Shot 2021-12-15 at 2.31.18 PM.png")
 
-Default transformation script
+<Frame caption="Default transformation script">
+![3068](https://files.readme.io/f530f18-Screen_Shot_2021-12-15_at_2.31.18_PM.png "Screen Shot 2021-12-15 at 2.31.18 PM.png")
+</Frame>
 
 You can use this as a base to understand how to read data with the `gluestick` package and manipulate it using `pandas`. You can also find more [sample scripts available on GitHub](https://github.com/hotgluexyz/recipes/tree/master/src).
 
-##
 
-Deploy the script
+## Deploy the script
 
 [](https://docs.hotglue.com/docs/transformations-overview#deploy-the-script)
 
 Once you have written your transformation script, you must deploy it using the hotglue tab in Jupyter.
 
-![3068](https://files.readme.io/b1680a8-Screen_Shot_2021-12-15_at_2.34.44_PM.png "Screen Shot 2021-12-15 at 2.34.44 PM.png")
 
-Deploy the transformation script
+<Frame caption="Deploy the transformation script">
+![3068](https://files.readme.io/b1680a8-Screen_Shot_2021-12-15_at_2.34.44_PM.png "Screen Shot 2021-12-15 at 2.34.44 PM.png")
+</Frame>
 
 Jupyter will prompt you to confirm the deployment as pictured below:
 
-![3068](https://files.readme.io/d554c88-Screen_Shot_2021-12-15_at_2.36.06_PM.png "Screen Shot 2021-12-15 at 2.36.06 PM.png")
 
-Confirm transformation script deployment
+<Frame caption="Confirm transformation script deployment">
+![3068](https://files.readme.io/d554c88-Screen_Shot_2021-12-15_at_2.36.06_PM.png "Screen Shot 2021-12-15 at 2.36.06 PM.png")
+</Frame>
+
 
 If you do not deploy your script, your changes will be autosaved but will **not** be used. Autosaved transformation scripts can be found in the `cached` folder.
 
 ![](https://files.readme.io/7fc9101-Screen_Shot_2022-12-26_at_6.49.12_PM.png)
 
-> 📘
->
-> Note that the CLI only downloads the deployed version of the script. If you have a script that is not deployed, you will need to load a Jupyter notebook to deploy your cached edits
+
+<Note>
+Note that the CLI only downloads the deployed version of the script. If you have a script that is not deployed, you will need to load a Jupyter notebook to deploy your cached edits
+</Note>
