@@ -1,37 +1,39 @@
 ---
 title: 'Tenants'
-description: 'What are tenants?'
+description: 'hotglue CLI commands for tenants'
 ---
+View tenants directly from the CLI.
 
-## What is a tenant?
+# Tenants List
 
-A **tenant** is one of your customers that has connected at least one integration via hotglue.
+## Description
 
-## What is an active tenant?
+Lists the tenants in the hotglue environment.
 
-An **active tenant** is any tenant that has had at least one sync job run within the last month. Learn more about [how active tenants relates to billing in our help center](https://help.hotglue.com/help/active-tenants).
-
-Learn more about tenants and how they are used in the walkthrough below:
-
-<iframe
-  width="670"
-  height="435"
-  src="https://www.loom.com/embed/5b7713c84a2b42eb9c35287fe52c5160?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowFullScreen
-></iframe>
+## Sample
 
 
-## What is a subtenant?
+``` shell 
+$ hotglue tenants list
+```
 
-**Subtenants** are used when a single tenant needs multiple distinct connections with the same connector. E.g.
+# Tenants Delete
 
-- A Shopify connection with multiple stores
-- A parent company with multiple CRMs for various acquired companies
+## Description
 
-Subtenants are denoted as `{ROOT TENANT}){SUB TENANT ID}` (e.g., `companyName_2` ).
+Deletes a tenant from hotglue (including scheduled jobs and any related jobs history/config files).
 
-## Creating a subtenant
+## Sample
 
-Subtenants must be created via the API, by making a call using the`{ROOT TENANT}_{SUB TENANT ID}` syntax.
+``` shell
+$ hotglue tenants delete -e prod.acme.com -u test-user
+✔ Finished: Deleting tenant test-user schedules.
+✔ Finished: Verifying user and authorizing.
+✔ Finished: Deleting tenant test-user for environment prod.acme.com.
+┌─────────────┐
+│ Tenant ID   │
+├─────────────┤
+│ test-user   │
+└─────────────┘
+```
+
