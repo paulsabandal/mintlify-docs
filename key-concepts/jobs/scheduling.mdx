@@ -3,6 +3,85 @@ title: 'Scheduling'
 description: 'Start building awesome documentation in under 5 minutes'
 ---
 
-## Add some content
+# Job Scheduling
 
-Learn how to update your docs locally and and deploy them to the public.
+Since hotglue syncs data via asynchronous jobs, it is often optimal to configure a **sync schedule** that is used to automatically trigger jobs on a certain interval.
+
+hotglue leverages UNIX cron expressions to offer flexible scheduling expressions. For example, the following expression would trigger every day at 12:00am UTC:
+
+```
+cron(0 0 * * *)
+```
+# How to configure the sync schedule
+
+## Using a default sync schedule
+
+A **default** sync schedule will apply to every tenant within a flow. The default sync schedule is automatically enabled when a tenant links a source.
+
+
+<Info>
+The default sync schedule _will not_ apply to any tenants that have already linked a source. The schedule (and any changes) only apply when tenants link a source.
+</Info>
+
+To configure the default sync schedule, you will first need to enable the **Automatically enable default sync schedule** environment setting:
+
+<Frame caption="Automatically enable default sync schedule setting">
+![](https://files.readme.io/19dfe7d-qa.hotglue.xyz_env_dev1102.erfx.hotglue.io_jobs_ulFC5LfQ3_test-user_3.png)
+
+</Frame>
+
+Once this setting is configured, open the flow you wish to add a default sync schedule for and open the **Sync Schedule** drawer
+
+<Warning>
+Make sure you're in the **admin view** when setting a default schedule, or it will **not** apply properly.
+</Warning>
+
+![](https://files.readme.io/479c34e-qa.hotglue.xyz_env_dev1102.erfx.hotglue.io_jobs_ulFC5LfQ3_test-user_4.png)
+
+In the schedule editor, configure your desired sync frequency, and **Save**. You should see the status set to enabled if it is enabled correctly.
+
+![](https://files.readme.io/349d0f8-qa.hotglue.xyz_env_dev1102.erfx.hotglue.io_jobs_ulFC5LfQ3_test-user_5.png)
+
+<Info>
+**Using the API**
+
+ If you'd like to apply a more granular default sync schedule using a cron expression, (e.g. every 15 minutes) [use the API](https://docs.hotglue.xyz/reference/jobs-schedule) to create a sync schedule for **default tenant**.
+</Info>
+
+## Customizing schedules for tenants
+
+
+To configure a sync schedule for a specific tenant, first navigate to the desired tenant.
+
+![](https://files.readme.io/b2a4586-qa.hotglue.xyz_env_dev1102.erfx.hotglue.io_content_tenants.png)
+
+From here, open the relevant flow you wish to schedule and open the sync schedule drawer.
+
+![](https://files.readme.io/7ab06a9-qa.hotglue.xyz_env_dev1102.erfx.hotglue.io_jobs_ulFC5LfQ3_test-user.png)
+
+From here you can configure the desired sync schedule, and press **Save**. If done correctly, you will see the status change to enabled.
+
+![](https://files.readme.io/db9fe28-qa.hotglue.xyz_env_dev1102.erfx.hotglue.io_jobs_ulFC5LfQ3_test-user_1.png)
+
+# API
+
+
+To configure a sync schedule via the API, head to the [schedule endpoint docs](https://docs.hotglue.com/reference/jobs-schedule).
+
+## Granular sync schedules
+
+[](https://docs.hotglue.com/docs/jobs-scheduling#granular-sync-schedules)
+
+You can use the API to configure any cron expression as a sync schedule. This is often helpful if you need jobs more frequent than hourly.
+
+You can use this to create a schedule for **default** tenant or any individual tenant.
+
+## Ignoring default credentials
+
+[](https://docs.hotglue.com/docs/jobs-scheduling#ignoring-default-credentials)
+
+If you want to **avoid running scheduled jobs for your default credentials**, but are using your default sync schedule to cascade to new tenants, you can use the API to create a sync schedule for your **default** tenant and set `"state" = "disabled"`
+
+This will continue to apply your sync schedule to new tenants but will avoid running scheduled jobs with your default credentials.
+
+
