@@ -9,11 +9,13 @@ description: "The hotglue widget allows you to offer native, inline integrations
 The hotglue widget is a white-labeled component that allows your users to integrate instantly, without leaving your app. You can embed the widget using a few lines of [Javascript](https://docs.hotglue.com/docs/embed-hotglue) or [React](https://docs.hotglue.com/docs/embed-hotglue).
 
 <Frame caption="The pop-up widget can be opened with Vanilla Javascript, React, or Next.js">
-![](https://files.readme.io/fea0655-Screen_Shot_2023-03-17_at_11.28.28_PM.png)
+<img src="https://files.readme.io/fea0655-Screen_Shot_2023-03-17_at_11.28.28_PM.png" width="300" />
 </Frame>
 
+<br />
+
 <Frame caption="The inline **Connections Component** can be used via React or Next.js">
-![](https://files.readme.io/be6fcf0-Screen_Shot_2023-03-17_at_11.22.37_PM.png)
+<img src="https://files.readme.io/be6fcf0-Screen_Shot_2023-03-17_at_11.22.37_PM.png" width="500" />
 </Frame>
 
 
@@ -175,36 +177,76 @@ export default function Home() {
 
 [](https://docs.hotglue.com/docs/embed-hotglue#installation-vanilla-javascript)
 
-##
-
-1\. Call and mount the widget
+## 1\. Call and mount the widget
 
 [](https://docs.hotglue.com/docs/embed-hotglue#1-call-and-mount-the-widget)
 
 The first step of embedding hotglue is to add the widget to your web app. Simply copy the code generated from the hotglue environment dashboard into your HTML `head` tag.
 
-**Default method**
+<Accordion title="Default method">
+``` javascript HTML
+<script src="https://hotglue.xyz/widgetv2.js"></script>
+<script>
+    HotGlue.mount({
+        "api_key": "YOUR-API-KEY",
+        "env_id": "YOUR-ENV-ID"
+    });
+</script>
+```
+</Accordion>
 
-**Async method**
+<Accordion title="Async method">
+``` javascript HTML
+<script src="https://hotglue.xyz/widgetv2.js"></script>
+<script>
+    HotGlue.mount({
+        "api_key": "YOUR-API-KEY",
+        "env_id": "YOUR-ENV-ID"
+    });
+</script>
+```
+</Accordion>
 
-##
+## 2\. Launch the widget
 
-2\. Launch the widget
-
-[](https://docs.hotglue.com/docs/embed-hotglue#2-launch-the-widget)
 
 **_Option 1 - HotGlue.link()_**
 
 Now that the hotglue widget is installed in your web app, open the widget by calling `HotGlue.link(<tenant id>, <flow id>, <source>, <preloaded>, <options>)`. In the example below, we also use `options` to hide the back button and add a listener to close the widget once the source is successfully linked.
 
-HTML
+``` HTML
+<script>
+    function launchHGSource() {
+        // Set the tenantId, flowId, and sourceId variables below
+        HotGlue.link(tenantId, flowId, sourceId, false, {
+          hideBackButtons: true,
+          listener: {
+            onSourceLinked: () => {
+              HotGlue.close();
+            }
+          }
+        })
+    }
+</script>
 
-`<script>     function launchHGSource() {         // Set the tenantId, flowId, and sourceId variables below         HotGlue.link(tenantId, flowId, sourceId, false, {           hideBackButtons: true,           listener: {             onSourceLinked: () => {               HotGlue.close();             }           }         })     } </script>  <button onclick="launchHGSource()">     <span>Open specific source</span> </button>`
+<button onclick="launchHGSource()">
+    <span>Open specific source</span>
+</button>
+```
 
 **_Option 2 - HotGlue.open()_**
 
 Alternatively, you can open the widget "flows" menu by calling `HotGlue.open(<tenant id>)`
 
-HTML
+``` HTML
+<script>
+    function launchHG() {
+        // change "tenant-id" to the id of the current user
+        HotGlue.open('test-user-id', {});
+    }
+</script>
+<button onclick="launchHG()">
+    <span>Open hotglue widget</span>
+</button>
 
-`   <script>     function launchHG() {         // change "tenant-id" to the id of the current user         HotGlue.open('test-user-id', {});     } </script> <button onclick="launchHG()">     <span>Open hotglue widget</span> </button>   `
+```
