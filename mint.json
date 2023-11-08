@@ -65,6 +65,7 @@
         {
           "group": "Jobs",
           "pages": [
+            "key-concepts/jobs/sync-jobs",
             "key-concepts/jobs/life-cycle",
             "key-concepts/jobs/scheduling"
           ]
@@ -79,6 +80,7 @@
         {
           "group": "React Reference",
           "pages": [
+            "embedded-widget/react/overview",
             "embedded-widget/react/use-the-widget",
             "embedded-widget/react/hotglue-config",
             "embedded-widget/react/inline-component"
