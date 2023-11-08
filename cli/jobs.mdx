@@ -1,8 +1,84 @@
 ---
 title: 'Jobs'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'hotglue CLI commands for jobs'
 ---
 
-## Add some content
+Programmatically view, clone, and manage jobs using the commands below.
 
-Learn how to update your docs locally and and deploy them to the public.
+# Jobs Download
+
+
+## Description
+
+Clones a remote job to your local machine, under a new directory with the name of the `job_id`.
+
+## Sample
+
+``` shell
+$ hotglue jobs download <job root>
+✔ Finished: Verifying user and authorizing.
+✔ Finished: Scanning for downloadable files.
+┌─────────────────────────────────────────────────┬─────────┬──────────────────────┐
+│ File                                            │ Size    │ LastModified         │
+├─────────────────────────────────────────────────┼─────────┼──────────────────────┤
+│ job-details.json                                │ 571     │ 2/9/2022, 6:29:30 PM │
+├─────────────────────────────────────────────────┼─────────┼──────────────────────┤
+│ sync-output/products-20220209T222727.csv        │ 3226419 │ 2/9/2022, 5:27:34 PM │
+└─────────────────────────────────────────────────┴─────────┴──────────────────────┘
+✔ Finished: Downloading file: default/flows/bTHIweD0W/jobs/2022/02/2/09/22/KfKW1X/job-details.json.
+✔ Finished: Downloading file: default/flows/bTHIweD0W/jobs/2022/02/2/09/22/KfKW1X/sync-output/products-20220209T222727.csv.
+```
+
+## Parameters
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `job root` |  | The `s3_root` (known as the job root) of the job to clone |
+
+
+# Jobs List
+
+## Description
+
+Lists the most recent jobs in the hotglue environment for a specific tenant/flow in chronological order.
+
+## Sample
+
+
+```
+$ hotglue jobs list
+✔ Finished: Retrieving jobs for environment: dev.hotglue.acme.com flow: bTHIweD0W tenant: default....
+┌────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ name           │ details                                                                                            │
+├────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ test:H3XnhScoo │ {                                                                                                  │
+│                │   "job_id": "KfKW1X",                                                                              │
+│                │   "env_id": "dev.hotglue.acme.com",                                                                │
+│                │   "flow_id": "bTHIweD0W",                                                                          │
+│                │   "job_name": "test:H3XnhScoo",                                                                    │
+│                │   "tenant": "default",                                                                             │
+│                │   "started_by": "default",                                                                         │
+│                │   "s3_root": "default/flows/bTHIweD0W/jobs/2022/02/2/09/22/KfKW1X",                                │
+│                │   "start_time": "2022-02-09T22:22:19.173879+00:00",                                                │
+│                │   "state": {},                                                                                     │
+│                │   "tap": "cin7",                                                                                   │
+│                │   "status": "JOB_COMPLETED",                                                                       │
+│                │   "scheduled_job": false,                                                                          │
+│                │   "message": "Status for Job (KfKW1X) was updated to JobStatus.JOB_COMPLETED; (flow: bTHIweD0W) ", │
+│                │   "task_id": "864256547fa34584aa61d46eac0d08c5",                                                   │
+│                │   "last_updated": "2022-02-09T23:29:29.791107+00:00",                                              │
+│                │   "processed_rows": 0                                                                              │
+│                │ }                                                                                                  │
+├────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
+```
+
+## Parameters
+
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `--count` | `5` | Number of jobs to return. Defaults to 5. |
+| `--tenant`
+`-u` | `default` | Tenant Id to query jobs for. Defaults to `default`, the admin user. |
+| `--env`
+`-e` |  | Environment Id to query jobs for. |
