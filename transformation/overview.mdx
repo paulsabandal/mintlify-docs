@@ -1,213 +1,103 @@
 ---
 title: "Overview"
-description: "Example overview page before API endpoints"
+description: ""
 ---
+## What are transformation scripts?
 
-#
+hotglue features a transformation layer that can be used to format the raw output from connectors into a format ingestible by your backend (or wherever you're piping the data to).
 
-Introduction to the widget
+In hotglue, all transformation scripts are written in Python and can use any open source Python modules you'd like. Since hotglue formats output from data support as CSV files, our sample scripts leverage our [gluestick](https://github.com/hotgluexyz/gluestick) package and [pandas](https://pandas.pydata.org/) heavily.
 
-[](https://docs.hotglue.com/docs/embed-hotglue#introduction-to-the-widget)
+<Warning>
+If you do not deploy your script, your changes will be saved but **not** used. This is so you don't accidentally break your integration while you're editing it. To learn how to deploy a script, read [Deploy a script](https://docs.hotglue.com/docs/transformations-overview#deploy-the-script).
+</Warning>
 
-The hotglue widget is a white-labeled component that allows your users to integrate instantly, without leaving your app. You can embed the widget using a few lines of [Javascript](https://docs.hotglue.com/docs/embed-hotglue) or [React](https://docs.hotglue.com/docs/embed-hotglue).
+## Start the JupyterLab workspace
 
-<Frame caption="The pop-up widget can be opened with Vanilla Javascript, React, or Next.js">
-![](https://files.readme.io/fea0655-Screen_Shot_2023-03-17_at_11.28.28_PM.png)
+To edit the transformation script for a connector, you can start a JupyterLab workspace directly from hotglue.
+
+Start by opening the settings for the connector you'd like to update. From here, launch the JupyterLab workspace by selecting the Python icon:
+
+<Note>
+
+Generally, when updating the transformation script you should launch the JupyterLab workspace from the admin view – **not** the tenant view. Launching JupyterLab as a tenant create a custom forked script for that tenant.
+
+</Note>
+
+<Frame caption="Connector configuration screen">
+![Connector configuration screen](https://files.readme.io/16aa095-Screen_Shot_2022-12-26_at_6.49.33_PM.png)
 </Frame>
 
-<Frame caption="The inline **Connections Component** can be used via React or Next.js">
-![](https://files.readme.io/be6fcf0-Screen_Shot_2023-03-17_at_11.22.37_PM.png)
-</Frame>
+hotglue will provision a hosted JupyterLab workspace for you to connect to – this may take a few minutes. Once the JupyterLab workspace is provisioned, click the launch button to open your workspace.
 
+![Connect to JupyterLab workspace](https://files.readme.io/00ef48d-Screen_Shot_2022-12-26_at_6.47.36_PM.png)
 
-* * *
+Connect to JupyterLab workspace
 
-# Installation (React)
+You've launched JupyterLab and should see something like the below! ![:tada:](https://docs.hotglue.com/public/img/emojis/tada.png ":tada:")
 
+![3068](https://files.readme.io/194d16c-Screen_Shot_2021-12-15_at_2.25.46_PM.png "Screen Shot 2021-12-15 at 2.25.46 PM.png")
 
-## Install the @hotglue/widget package
+JupyterLab
 
-
-If your project is built in React, you can install the [@hotglue/widget](https://www.npmjs.com/package/@hotglue/widget) package.
-
-using npm
-
-  ```
-  npm install @hotglue/widget
-  ```
-
-or using yarn
-
-  ```
-  yarn add @hotglue/widget
-  ```
-
-## Launch the widget
-
-First you must include the `HotglueConfig` provider as a higher order component in your React app. For example, in `index.js`:
-
-``` javascript index.js
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import HotglueConfig from '@hotglue/widget';
-
-ReactDOM.render(
-  <HotglueConfig
-    config={{
-      apiKey: 'your-public-environment-api-key',
-      envId: 'your-env-id'
-    }}
-  >
-    <App />
-  </HotglueConfig>,
-  document.getElementById('root')
-);
-
-```
-
-Now you can launch the widget using the `useHotglue` hook:
-
-``` javascript App.js
-
-import { useHotglue } from '@hotglue/widget';
-
-const App = (props) => {
-  const { openWidget } = useHotglue();
-
-  return <div>
-    <button onClick={() => openWidget("test-user")}>Open widget</button>
-  </div>
-}
-
-export default App;
-
-```
-
-You can also use the [Connections component](https://docs.hotglue.com/docs/connections) if you want to use the widget inline rather than in a modal.
-
-# Installation (Next.js)
-
-
-Just like above, begin by installing the [@hotglue/widget](https://www.npmjs.com/package/@hotglue/widget) package
-
-using npm
-
-  ```
-  npm install --save @hotglue/widget
-  ```
-
-or yarn
-
-  ```
-  yarn add @hotglue/widget
-  ```
-
-Import `HotglueConfig` on your page and configure it.
-
-
-``` javascript next.js
-
-import dynamic from 'next/dynamic'
-const HotglueConfig = dynamic(() => import('@hotglue/widget'), { ssr: false })
-export default function Home() {
-	return (
-		<div className={styles.container}>
-			<HotglueConfig
-				config={{
-					apiKey: 'ADCgzXQpsj2aaPwzaDX0p3a33M0pUS88kmlnVvwe',
-					envId: 'dev.yjzx.hotglue.gmail.com'
-				}}
-				>
-				<HomeComponent />
-			</HotglueConfig>
-		</div>
-	)}
-```
-
-Create the `HomeComponent`. Inside of it you can launch the widget using the useHotglue hook:
-
-``` javascript next.js
-
-import { useHotglue } from '@hotglue/widget'
-
-const HomeComponent = (props, ref) => {
-	const { openWidget } = useHotglue()
-	
-	const handleOpenWidget = (tenant) => {
-		openWidget(tenant)
-	}
-	
-	return (
-		<div>
-			<button onClick={() => handleOpenWidget('test-user')}>
-				openWidget as test-user
-			</button>
-		</div>)
-}
-
-export default HomeComponent
-```
-
-
-You can also use the `connections` component.
-
-``` javascript next.js
-import dynamic from 'next/dynamic'
-const HotglueConfig = dynamic(() => import('@hotglue/widget'), { ssr: false })
-import { Connections } from '@hotglue/widget'
-export default function Home() {
-	
-	return (
-		<div>
-			<HotglueConfig
-				config={{
-					apiKey: 'ADCgzXQpsj2aaPwzaDX0p3a33M0pUS88kmlnVvwe',
-					envId: 'dev.yjzx.hotglue.gmail.com',
-				}}
-				>
-				<Connections tenant='test-user' />
-			</HotglueConfig>
-		</div>
-	)
-}
-```
-
-# Installation (Vanilla JavaScript)
-
-[](https://docs.hotglue.com/docs/embed-hotglue#installation-vanilla-javascript)
+> 📘
+>
+> Note that JupyterLab workspaces will timeout after 30 minutes of inactivity, at which point you'll need to start a new workspace. When your session times out, your script is autosaved.
 
 ##
 
-1\. Call and mount the widget
+Define dependencies
 
-[](https://docs.hotglue.com/docs/embed-hotglue#1-call-and-mount-the-widget)
+[](https://docs.hotglue.com/docs/transformations-overview#define-dependencies)
 
-The first step of embedding hotglue is to add the widget to your web app. Simply copy the code generated from the hotglue environment dashboard into your HTML `head` tag.
+The `requirements.txt` file in the root directory is where you can specify any Python modules you wish to use as dependencies. In this example, my `requirements.txt` contains the following:
 
-**Default method**
+requirements.txt
 
-**Async method**
+`gluestick==1.0.4 numpy==1.16.2 pandas==0.25.3 requests==2.24.0`
+
+As mentioned above the [gluestick](https://github.com/hotgluexyz/gluestick) package is developed by the hotglue team and provides utility functions for reading and manipulating CSV files with pandas. Read the [wiki on GitHub](https://github.com/hotgluexyz/gluestick/wiki).
+
+The [requests](https://docs.python-requests.org/en/latest/) package can be used to make API requests directly from your transformation script. See the testing `requirements.txt` we created in Jupyter below:
+
+![](https://files.readme.io/17a8a77-Screen_Shot_2021-12-15_at_2.26.26_PM.png "Screen Shot 2021-12-15 at 2.26.26 PM.png")
 
 ##
 
-2\. Launch the widget
+Edit the script
 
-[](https://docs.hotglue.com/docs/embed-hotglue#2-launch-the-widget)
+[](https://docs.hotglue.com/docs/transformations-overview#edit-the-script)
 
-**_Option 1 - HotGlue.link()_**
+Inside the `etl` folder, you will find a file titled `etl.ipynb` containing a [default transformation script](https://github.com/hotgluexyz/recipes/blob/master/src/default.ipynb)
 
-Now that the hotglue widget is installed in your web app, open the widget by calling `HotGlue.link(<tenant id>, <flow id>, <source>, <preloaded>, <options>)`. In the example below, we also use `options` to hide the back button and add a listener to close the widget once the source is successfully linked.
+![3068](https://files.readme.io/f530f18-Screen_Shot_2021-12-15_at_2.31.18_PM.png "Screen Shot 2021-12-15 at 2.31.18 PM.png")
 
-HTML
+Default transformation script
 
-`<script>     function launchHGSource() {         // Set the tenantId, flowId, and sourceId variables below         HotGlue.link(tenantId, flowId, sourceId, false, {           hideBackButtons: true,           listener: {             onSourceLinked: () => {               HotGlue.close();             }           }         })     } </script>  <button onclick="launchHGSource()">     <span>Open specific source</span> </button>`
+You can use this as a base to understand how to read data with the `gluestick` package and manipulate it using `pandas`. You can also find more [sample scripts available on GitHub](https://github.com/hotgluexyz/recipes/tree/master/src).
 
-**_Option 2 - HotGlue.open()_**
+##
 
-Alternatively, you can open the widget "flows" menu by calling `HotGlue.open(<tenant id>)`
+Deploy the script
 
-HTML
+[](https://docs.hotglue.com/docs/transformations-overview#deploy-the-script)
 
-`   <script>     function launchHG() {         // change "tenant-id" to the id of the current user         HotGlue.open('test-user-id', {});     } </script> <button onclick="launchHG()">     <span>Open hotglue widget</span> </button>   `
+Once you have written your transformation script, you must deploy it using the hotglue tab in Jupyter.
+
+![3068](https://files.readme.io/b1680a8-Screen_Shot_2021-12-15_at_2.34.44_PM.png "Screen Shot 2021-12-15 at 2.34.44 PM.png")
+
+Deploy the transformation script
+
+Jupyter will prompt you to confirm the deployment as pictured below:
+
+![3068](https://files.readme.io/d554c88-Screen_Shot_2021-12-15_at_2.36.06_PM.png "Screen Shot 2021-12-15 at 2.36.06 PM.png")
+
+Confirm transformation script deployment
+
+If you do not deploy your script, your changes will be autosaved but will **not** be used. Autosaved transformation scripts can be found in the `cached` folder.
+
+![](https://files.readme.io/7fc9101-Screen_Shot_2022-12-26_at_6.49.12_PM.png)
+
+> 📘
+>
+> Note that the CLI only downloads the deployed version of the script. If you have a script that is not deployed, you will need to load a Jupyter notebook to deploy your cached edits
