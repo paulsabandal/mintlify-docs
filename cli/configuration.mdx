@@ -51,22 +51,45 @@ Once you have this done, you can create your Project config. For this example, I
 
 Here's a sample config, based on the examples listed above:
 
-.hotgluerc
 
-```shell 
-  env: dev.hotglue.acme.com flow: MDKdfumqM tap: salesforce 
+```shell .hotgluerc
+  env: dev.hotglue.acme.com 
+  flow: MDKdfumqM 
+  tap: salesforce 
 ```
 
 You can now verify your config was created successfully using the `hotglue config` command:
 
-`
-$ hotglue config ┌─────────┬───────────────────────────┬─────────────────────────────────────────┬─────────┐ │ Setting │ Value                     │ Config File                             │ Type    │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ apikey  │ ************************  │ /.hotglue/config.yaml                   │ Profile │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ env     │ dev.hotglue.acme.com      │ .hotgluerc                              │ Project │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ flow    │ MDKdfumqM                 │ .hotgluerc                              │ Project │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ tap     │ salesforce                │ .hotgluerc                              │ Project │ ├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤ │ tenant  │ default                   │ .hotgluerc                              │ Project │ └─────────┴───────────────────────────┴─────────────────────────────────────────┴─────────┘`
-`
-
+``` shell
+$ hotglue config
+┌─────────┬───────────────────────────┬─────────────────────────────────────────┬─────────┐
+│ Setting │ Value                     │ Config File                             │ Type    │
+├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤
+│ apikey  │ ************************  │ /.hotglue/config.yaml                   │ Profile │
+├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤
+│ env     │ dev.hotglue.acme.com      │ .hotgluerc                              │ Project │
+├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤
+│ flow    │ MDKdfumqM                 │ .hotgluerc                              │ Project │
+├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤
+│ tap     │ salesforce                │ .hotgluerc                              │ Project │
+├─────────┼───────────────────────────┼─────────────────────────────────────────┼─────────┤
+│ tenant  │ default                   │ .hotgluerc                              │ Project │
+└─────────┴───────────────────────────┴─────────────────────────────────────────┴─────────┘
+```
 ## Project structure
 
 [](https://docs.hotglue.com/docs/cli-configuration#project-structure)
 
 When developing transformation scripts, we recommend a project structure similar to the following, so you can easily deploy scripts for multiple sources with ease. Note that each folder contains a unique `.hotgluerc` which reference different sources (and can even reference different flows).
 
-`├── salesforce │   ├── etl.ipynb │   └── .hotgluerc ├── hubspot │   ├── etl.ipynb │   └── .hotgluerc ├── pipedrive │   ├── etl.ipynb │   └── .hotgluerc`
+```
+├── salesforce
+│   ├── etl.ipynb
+│   └── .hotgluerc
+├── hubspot
+│   ├── etl.ipynb
+│   └── .hotgluerc
+├── pipedrive
+│   ├── etl.ipynb
+│   └── .hotgluerc
+```
