@@ -1,8 +1,97 @@
 ---
 title: 'ETL'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'hotglue CLI commands for ETL'
 ---
 
-## Add some content
+Programmatically manage your transformation scripts using the `etl` commands below.
 
-Learn how to update your docs locally and and deploy them to the public.
+# ETL Download
+
+
+## Description
+
+Clones the remote ETL script saved in hotglue to your local machine.
+
+## Sample
+
+``` shell
+
+$ hotglue etl download [--overwrite] [--downloadTo]
+✔ Finished: Verifying user and authorizing.
+✔ Finished: Scanning for downloadable files.
+ℹ Info: Downloading script files to ./scripts/tap.
+✔ Finished: Downloading file: etl.ipynb.
+┌───────────┬────────────┐
+│ File      │ Status     │
+├───────────┼────────────┤
+│ etl.ipynb │ Downloaded │
+└───────────┴────────────┘
+
+```
+
+## Parameters
+
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `--overwrite`
+`-o` | `false` | When enabled, overwrites any files that already exist locally in the download to directory. |
+| `--downloadTo`
+`-d` | `.` | The directory to download the ETL to. Defaults to the local directory. |
+
+# ETL Deploy
+
+
+## Description
+
+Deploys the local ETL script to hotglue.
+
+## Sample
+
+[](https://docs.hotglue.com/docs/cli-etl#sample-1)
+
+```
+$ hotglue etl deploy [--sourceFolder]
+✔ Finished: Verifying user and authorizing.
+✔ Finished: Validating flow and tap location.
+✔ Finished: Preparing deployment target.
+ℹ Info: Deploying ETL scripts.
+✔ Finished: Pushing file: default/flows/bTHIweD0W/taps/cin7/etl/etl.ipynb.
+┌─────────────────────────────────────────────────┬──────────┐
+│ File                                            │ Status   │
+├─────────────────────────────────────────────────┼──────────┤
+│ default/flows/bTHIweD0W/taps/cin7/etl/etl.ipynb │ Deleted  │
+├─────────────────────────────────────────────────┼──────────┤
+│ default/flows/bTHIweD0W/taps/cin7/etl/etl.ipynb │ Deployed │
+└─────────────────────────────────────────────────┴──────────┘
+```
+
+## Parameters
+
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `--sourceFolder`
+`-s` | `.` | The directory to upload the ETL script from. Defaults to the local directory. |
+
+# ETL Delete
+
+## Description
+
+Deletes a deployed ETL script on hotglue.
+
+## Sample
+
+
+``` shell
+$ hotglue etl delete
+ℹ Info: Deleting ETL scripts for Tenant tenantId Flow flowId and Tap tapId to envId.
+✔ Finished: Verifying user and authorizing.
+✔ Finished: Deleting ETL scripts.
+┌───────────┬─────────┐
+│ File      │ Status  │
+├───────────┼─────────┤
+│ etl.ipynb │ Deleted │
+└───────────┴─────────┘
+
+```
