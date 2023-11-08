@@ -18,19 +18,62 @@ description: "A quick overview of hotglue"
 
 hotglue enables you to offer native, user-facing SaaS integrations to your customers in minutes without sacrificing control over the data.
 
-hotglue is embeddable, cloud-based, and built on the Python ecosystem — enabling developers to support more data sources, manage data cleansing & transformation, and offer a self-serve experience to their users. With hotglue, any developer can build a data integration pipeline in minutes without months of development and maintenance.
+hotglue is **embeddable**, **cloud-based**, and built on the **Python ecosystem** — enabling developers to support more data sources, manage data cleansing & transformation, and offer a self-serve experience to their users. With hotglue, any developer can build a data integration pipeline in minutes without months of development and maintenance.
 
 
 ## What's different about hotglue?
 
 ### Open source connectors
 
-All of hotglue's connectors (taps) are completely open source and based on the Singer spec for creating connectors to 3rd party systems. There are already hundreds of connectors available created by open source contributors – including hotglue.
+All of hotglue's connectors (taps) are completely open source and based on the [Singer spec](https://singer.io/) for creating connectors to 3rd party systems. There are already hundreds of connectors available created by open source contributors – [including hotglue](https://github.com/hotgluexyz).
+
 
 <img src="https://files.readme.io/5ad1733-sources.png" alt="Source" />
 
-We are partnered with Meltano which is creating a community around the Singer spec to create well-maintained connectors to every 3rd party system you can imagine. In our view, the only way to keep integrations updated with the latest SaaS platforms and other data sources is via an open source community of developers.
+We are partnered with [Meltano](https://meltano.com/) which is creating a community around the Singer spec to create well-maintained connectors to every 3rd party system you can imagine. In our view, the only way to keep integrations updated with the latest SaaS platforms and other data sources is via an open source community of developers.
 
 
+### Interesting, but why should I care?
 
+One of the biggest reasons developers are (rightly) opposed to using an integration platform is because they want to avoid blockers when shipping new features (and integrations). For example, if your users want an integration with a platform hotglue doesn't support, you likely don't want to wait for the hotglue team to add it to their roadmap.
 
+Since all hotglue connectors are compatible with Singer, you could easily create a new Singer tap yourself (for instance, using the [Singer SDK](https://gitlab.com/meltano/singer-sdk)). This way your team is assured you can ship new integrations leveraging the hotglue platform, without waiting on our team. Pretty cool, right?
+
+## Stateful integrations
+
+hotglue was designed to correlate data across 3rd party systems. For example, hotglue makes it easy to sync Quickbooks Invoices and Salesforce Opportunities, and programmatically match each opportunity to an invoice.
+This type of behavior is possible because hotglue's integrations are **stateful** – developers have access to a full picture of a user's data through **snapshots**. This makes it easier to build complex integrations while relying on hotglue to deal with orchestration, data integrity, and more.
+
+## Handles non-standardized APIs
+
+SaaS APIs are far from unified – extract the data you need before it reaches your product. hotglue comes with a Python-based transformation layer, so developers can write simple transform scripts to standardize data before it gets to your backend.
+
+<Frame caption="hotglue jobs + standardizing data">
+![960](https://files.readme.io/c3488a5-standardize.png "standardize.png")
+</Frame>
+
+* * *
+
+# What are embedded integration (iPaaS) platforms?
+
+Embedded integration platforms enable developers to build native integrations faster and more scalably by sitting within your product. End users connect their data sources within your web app, but the iPaaS handles authentication with the 3rd party system and orchestration of data syncs.
+
+![](https://files.readme.io/b88c7ff-dzone_integrations_talk.png "dzone integrations talk.png")
+
+### Extract
+
+hotglue leverages connectors to securely provide access to the most popular data sources out of the box. From Salesforce to HubSpot, we've got you covered.
+
+Through the hotglue widget, you can provide users with a simple self-serve interface to connect their data sources to your app with just two lines of code.
+
+Read more about how extraction is handled in the hotglue platform here.
+
+### Load
+
+All data from your configured connectors is moved to Python processing and consumption by your application. Data never leaves your cloud environment, so your data is safe every step of the way.
+
+### Transform
+
+hotglue enables developers to leverage the Python ecosystem to compose transformation scripts. Built with developers in mind, hotglue combines the power of Python modules like Pandas and Dask with the power of AWS, all in a simple always-ready workspace powered by JupyterLab.
+
+Read more about the benefits of the embedded integration paradigm [here](https://medium.com/pminsider/an-alternative-strategy-for-solving-etl-extract-transform-load-for-your-product-3dcdbf9ec21f?source=friends_link&sk=6b9094a96c57e9d4aa4d6ec49b584cda).
